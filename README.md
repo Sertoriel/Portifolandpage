@@ -68,3 +68,47 @@ O projeto segue a arquitetura **N-Tier** (Camadas), separando estritamente a int
 Abra um terminal e navegue até a pasta do backend:
 ```bash
 cd backend
+Configure as variáveis de segurança locais (User Secrets) para o JWT e Login:
+
+Bash
+dotnet user-secrets init
+dotnet user-secrets set "Jwt:Key" "SuaChaveSuperSecretaMuitoLongaAqui123!@#"
+dotnet user-secrets set "AdminLogin:Username" "seu_usuario"
+dotnet user-secrets set "AdminLogin:Password" "sua_senha"
+Gere o banco de dados e as tabelas:
+
+Bash
+dotnet ef database update
+Inicie o servidor (geralmente rodará em http://localhost:5000):
+
+Bash
+dotnet watch
+(Acesse http://localhost:5000/scalar/v1 para ver a documentação da API).
+
+2. Configurando o Frontend (React)
+Abra um novo terminal e navegue até a pasta do frontend:
+
+Bash
+cd frontend
+Instale as dependências:
+
+Bash
+npm install
+Inicie o servidor de desenvolvimento:
+
+Bash
+npm run dev
+(Acesse http://localhost:5173 no seu navegador).
+
+👤 Autor
+João Arthur Software Engineer & Game Developer
+
+GitHub
+
+LinkedIn (Adicione seu link aqui)
+
+Contato
+
+<p align="center">
+Desenvolvido com ☕ e muito código.
+</p>
