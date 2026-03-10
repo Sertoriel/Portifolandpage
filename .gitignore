@@ -1,0 +1,26 @@
+# =========================
+# IGNORAR ARQUIVOS DO REACT
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+npm-debug.log*
+
+# =========================
+# IGNORAR ARQUIVOS DO .NET
+# =========================
+backend/bin/
+backend/obj/
+backend/appsettings.Development.json
+
+# Ignorar o banco de dados local (Segurança!)
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+
+# =========================
+# SISTEMA OPERACIONAL
+# =========================
+.DS_Store
+Thumbs.db
