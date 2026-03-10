@@ -96,8 +96,9 @@ dotnet watch
 
 ```Bash
 cd frontend
-Instale as dependências:
 ```
+
+## Instale as dependências:
 
 ```Bash
 npm install
