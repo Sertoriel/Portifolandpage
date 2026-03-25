@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Portfol.Api.Data;
+using Portfol.Api.Services;
 using Scalar.AspNetCore; // <-- Importação do Scalar
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +24,7 @@ builder.Services.AddCors(options =>
 });
 
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
