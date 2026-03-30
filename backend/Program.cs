@@ -25,6 +25,7 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();

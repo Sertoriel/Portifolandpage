@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Portfol.Api.Data;
 using Portfol.Api.Models;
+using Portfol.Api.Services;
 
 namespace Portfol.Api.Controllers;
 
@@ -12,11 +13,13 @@ namespace Portfol.Api.Controllers;
 public class ProjectsController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IImageUploadService _imageUploadService;
 
-    // Injeção de Dependência: O .NET entrega o banco de dados pronto para usarmos aqui
-    public ProjectsController(AppDbContext context)
+    // Injeção de Dependência: O .NET entrega o banco de dados e serviços prontos
+    public ProjectsController(AppDbContext context, IImageUploadService imageUploadService)
     {
         _context = context;
+        _imageUploadService = imageUploadService;
     }
 
     // GET: api/projects
@@ -47,33 +50,83 @@ public class ProjectsController : ControllerBase
     }
 
     // POST: api/projects
-    // Rota que o React vai chamar para cadastrar um projeto novo
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Project>> CreateProject(Project project)
+    public async Task<ActionResult<Project>> CreateProject([FromForm] ProjectUploadDto dto)
     {
-        // 1. O EF Core pega o projeto que veio do React e prepara para salvar
+        // 1. Verificação Híbrida (Se não mandou arquivo físico, usa o texto puro do ThumbnailUrl)
+        string finalUrl = dto.ThumbnailUrl ?? string.Empty;
+
+        // Se fez upload com pacote de byte válido
+        if (dto.Image != null && dto.Image.Length > 0)
+        {
+            finalUrl = await _imageUploadService.UploadImageAsync(dto.Image);
+        }
+
+        // 2. Mapeamento do DTO para a Entidade de Banco EF Core
+        var project = new Project
+        {
+            Title = dto.Title,
+            Category = dto.Category,
+            ShortDescription = dto.ShortDescription,
+            FullDescription = dto.FullDescription,
+            ThumbnailUrl = finalUrl,
+            GithubLink = dto.GithubLink,
+            DownloadLink = dto.DownloadLink,
+            ColorClass = dto.ColorClass,
+            BgBorderClass = dto.BgBorderClass,
+            Techs = !string.IsNullOrWhiteSpace(dto.Techs) 
+                ? dto.Techs.Split(',').Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t)).ToList() 
+                : new List<string>()
+        };
+
         _context.Projects.Add(project);
-        
-        // 2. Salva de fato no banco de dados SQLite
         await _context.SaveChangesAsync();
 
-        // 3. Retorna o status 201 (Created) e avisa qual ID o banco gerou para esse novo projeto
         return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
     }
 
     [HttpPut("{id}")]
-    [Authorize] // Protegido pela pulseira VIP!
-    public async Task<IActionResult> UpdateProject(int id, Project project)
+    [Authorize]
+    public async Task<IActionResult> UpdateProject(int id, [FromForm] ProjectUploadDto dto)
     {
-        // Trava de segurança: O ID da URL tem que bater com o ID do corpo da requisição
-        if (id != project.Id)
+        if (id != dto.Id)
         {
             return BadRequest(new { message = "O ID da URL não bate com o do projeto." });
         }
 
-        // Avisa o Entity Framework que esse projeto foi modificado e precisa ser salvo
-        _context.Entry(project).State = EntityState.Modified;
+        var existingProject = await _context.Projects.FindAsync(id);
+        if (existingProject == null)
+            return NotFound();
+
+        // Verificação Híbrida de Atualização
+        if (dto.Image != null && dto.Image.Length > 0)
+        {
+            // O usuário fez upload de uma FOTO NOVA da própria máquina. Ignore qualquer string antiga e envie para o Cloudinary.
+            existingProject.ThumbnailUrl = await _imageUploadService.UploadImageAsync(dto.Image);
+        }
+        else if (dto.ThumbnailUrl != existingProject.ThumbnailUrl)
+        {
+            // O usuário não upou foto binária, mas alterou (ou colou) o link manualmente de uma já existente.
+            existingProject.ThumbnailUrl = dto.ThumbnailUrl ?? string.Empty;
+        }
+
+        // Alterações básicas textuais
+        existingProject.Title = dto.Title;
+        existingProject.Category = dto.Category;
+        existingProject.ShortDescription = dto.ShortDescription;
+        existingProject.FullDescription = dto.FullDescription;
+        existingProject.GithubLink = dto.GithubLink;
+        existingProject.DownloadLink = dto.DownloadLink;
+
+        if (!string.IsNullOrWhiteSpace(dto.Techs))
+        {
+            existingProject.Techs = dto.Techs.Split(',').Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t)).ToList();
+        }
+        else
+        {
+             existingProject.Techs = new List<string>();
+        }
 
         try
         {
@@ -87,7 +140,7 @@ public class ProjectsController : ControllerBase
                 throw;
         }
 
-        return NoContent(); // 204 No Content: Deu certo e não tem dados novos para devolver
+        return NoContent(); 
     }
 
     // DELETE: api/projects/5

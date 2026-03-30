@@ -11,7 +11,7 @@ export default function AdminDashboard() {
 
     const [formData, setFormData] = useState({
         title: '', category: '', shortDescription: '', fullDescription: '',
-        techs: '', thumbnailUrl: '', githubLink: '', downloadLink: ''
+        techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '', image: null
     })
 
     const [status, setStatus] = useState({ loading: false, message: '', type: '' })
@@ -43,31 +43,34 @@ export default function AdminDashboard() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    // 2. Função de Salvar (Inteligente: Sabe se é POST ou PUT)
+    // 2. Função de Salvar (Multipart Form)
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setStatus({ loading: true, message: 'Processando...', type: 'info' })
+        setStatus({ loading: true, message: 'Processando (incluindo upload se anexado)...', type: 'info' })
 
-        const techArray = formData.techs.split(',').map(tech => tech.trim()).filter(tech => tech !== '')
+        // Migramos para FormData nativo do Javascript
+        const payload = new FormData()
+        
+        // Empacotando os textos! ID manda se estivermos editando
+        if (editingId) payload.append('Id', editingId)
+        payload.append('Title', formData.title)
+        payload.append('Category', formData.category)
+        payload.append('ShortDescription', formData.shortDescription)
+        payload.append('FullDescription', formData.fullDescription)
+        payload.append('Techs', formData.techs) // Envia a string crua para o .NET fazer o split
 
-        const projectPayload = {
-            id: editingId || 0, // Se estiver editando, manda o ID real. Se não, manda 0 pro banco gerar um novo.
-            title: formData.title,
-            category: formData.category,
-            shortDescription: formData.shortDescription,
-            fullDescription: formData.fullDescription,
-            techs: techArray,
-            thumbnailUrl: formData.thumbnailUrl,
-            githubLink: formData.githubLink,
-            downloadLink: formData.downloadLink,
-            colorClass: "text-blue-400",
-            bgBorderClass: "border-blue-500/30"
+        if (formData.githubLink) payload.append('GithubLink', formData.githubLink)
+        if (formData.downloadLink) payload.append('DownloadLink', formData.downloadLink)
+        if (formData.thumbnailUrl) payload.append('ThumbnailUrl', formData.thumbnailUrl)
+        
+        // Se há um arquivo fisicamente anexado...
+        if (formData.image) {
+            payload.append('Image', formData.image)
         }
 
         try {
             const token = localStorage.getItem('portfolio_token')
 
-            // Se editingId existe, a URL e o Método mudam para atualizar (PUT). Senão, é criar (POST).
             const url = editingId
                 ? `http://localhost:5000/api/Projects/${editingId}`
                 : 'http://localhost:5000/api/Projects'
@@ -77,10 +80,11 @@ export default function AdminDashboard() {
             const response = await fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json',
+                    // CUIDADO: Quando mandamos File+Texto, não podemos setar 'Content-Type': 'application/json' 
+                    // e nem multipart manual. O browser faz a boundary magic automaticamente para a gente!
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(projectPayload)
+                body: payload
             })
 
             if (response.ok) {
@@ -130,7 +134,8 @@ export default function AdminDashboard() {
             techs: project.techs.join(', '), // Transforma o Array de volta em String para o input
             thumbnailUrl: project.thumbnailUrl || '',
             githubLink: project.githubLink || '',
-            downloadLink: project.downloadLink || ''
+            downloadLink: project.downloadLink || '',
+            image: null // Reseta a imagem pra não re-enviar arquivo antigo sem querer
         })
         // Rola a página para o topo suavemente para ver o form
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -139,7 +144,7 @@ export default function AdminDashboard() {
 
     const cancelEdit = () => {
         setEditingId(null)
-        setFormData({ title: '', category: '', shortDescription: '', fullDescription: '', techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '' })
+        setFormData({ title: '', category: '', shortDescription: '', fullDescription: '', techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '', image: null })
         setStatus({ loading: false, message: '', type: '' })
     }
 
@@ -207,11 +212,32 @@ export default function AdminDashboard() {
                         <input type="text" name="techs" value={formData.techs} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm text-gray-400">Thumbnail URL</label>
-                            <input type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                    {/* SESSÃO HÍBRIDA DA IMAGEM */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-xl border border-blue-500/20 bg-blue-900/10">
+                        <div className="flex flex-col gap-2 relative">
+                            <label className="text-sm font-bold text-blue-300 flex justify-between">
+                                Thumbnail Web Link
+                                {formData.image && <span className="text-xs font-normal text-yellow-500">(Desativado por Upload)</span>}
+                            </label>
+                            <input disabled={!!formData.image} type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} placeholder="https://..." className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                         </div>
+                        <div className="flex flex-col gap-2 relative">
+                            <label className="text-sm font-bold text-purple-300 flex justify-between">
+                                Ou Upload Físico (Cloudinary)
+                                {formData.thumbnailUrl && <span className="text-xs font-normal text-yellow-500">(Limpe o link p/ usar)</span>}
+                            </label>
+                            <input 
+                                disabled={!!formData.thumbnailUrl}
+                                type="file" 
+                                name="image" 
+                                accept="image/*" 
+                                onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })} 
+                                className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-[9px] text-white focus:outline-none focus:border-purple-500 transition-all cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-500" 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">GitHub Link</label>
                             <input type="url" name="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />

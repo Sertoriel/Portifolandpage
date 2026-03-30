@@ -4,7 +4,7 @@ param (
     [Parameter(Mandatory=$true)][string]$Value
 )
 
-$BackendDir = "..\..\backend"
+$BackendDir = "..\..\..\backend"
 Set-Location -Path $BackendDir
 
 Write-Host "Injetando segredo localmente para a chave: $Key" -ForegroundColor Cyan
