@@ -202,10 +202,16 @@ export default function AdminDashboard() {
                         <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-400">Descrição Completa *</label>
-                        <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="4" className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500"></textarea>
-                    </div>
+                        <div className="flex flex-col gap-2 md:col-span-2">
+                            <label className="text-sm font-bold text-gray-300 flex items-center justify-between">
+                                Descrição Completa do Projeto
+                                <span className="text-xs font-normal text-blue-400 bg-blue-900/30 px-2 py-1 rounded-full flex items-center gap-1">
+                                    <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"/></svg>
+                                    Suporta Markdown (Estilo Obsidian)
+                                </span>
+                            </label>
+                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm leading-relaxed"></textarea>
+                        </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Tecnologias (Vírgula)</label>

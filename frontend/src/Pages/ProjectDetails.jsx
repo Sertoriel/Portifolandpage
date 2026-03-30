@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Navbar from '../components/Navbar'
 
 export default function ProjectDetails() {
@@ -70,9 +72,11 @@ export default function ProjectDetails() {
 
                 <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl">
 
-                    <p className="text-gray-300 leading-relaxed mb-8">
-                        {project.fullDescription}
-                    </p>
+                    <article className="prose prose-invert prose-blue max-w-none mb-8 text-gray-300">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {project.fullDescription}
+                        </ReactMarkdown>
+                    </article>
 
                     <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-800">
                         {project.githubLink && (
