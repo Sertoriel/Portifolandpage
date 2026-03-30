@@ -70,7 +70,7 @@ export default function Login() {
                             required
                             value={credentials.username}
                             onChange={handleChange}
-                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
                             placeholder="Digite seu usuário"
                         />
                     </div>
@@ -83,7 +83,7 @@ export default function Login() {
                             required
                             value={credentials.password}
                             onChange={handleChange}
-                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
                             placeholder="••••••••"
                         />
                     </div>
@@ -91,7 +91,7 @@ export default function Login() {
                     <button
                         type="submit"
                         disabled={status.loading}
-                        className={`w-full py-4 rounded-xl font-bold text-lg mt-2 transition-all ${status.loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 cursor-pointer shadow-[0_0_15px_rgba(37,99,235,0.4)]'}`}
+                        className={`w-full py-4 rounded-xl font-bold text-lg mt-2 transition-all ${status.loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-brand-600 hover:bg-brand-500 cursor-pointer shadow-[0_0_15px_rgba(37,106,94,0.4)]'}`}
                     >
                         {status.loading ? 'Autenticando...' : 'Entrar'}
                     </button>

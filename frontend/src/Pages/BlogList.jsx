@@ -50,7 +50,7 @@ export default function BlogList() {
                             >
                                 <Link to={`/blog/${post.slug}`}>
                                     <div className="flex flex-col gap-1 cursor-pointer">
-                                        <div className="flex items-center gap-3 text-sm text-blue-400 font-mono mb-1">
+                                        <div className="flex items-center gap-3 text-sm text-brand-400 font-mono mb-1">
                                             <span>
                                                 {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
                                                     day: '2-digit', month: 'short', year: 'numeric'
@@ -59,7 +59,7 @@ export default function BlogList() {
                                             <span className="text-gray-600">•</span>
                                             <span className="text-gray-500">{Math.max(1, Math.ceil(post.content.length / 800))} min de leitura</span>
                                         </div>
-                                        <h2 className="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-blue-300 transition-colors leading-snug">
+                                        <h2 className="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-brand-300 transition-colors leading-snug">
                                             {post.title}
                                         </h2>
                                         <p className="text-gray-400 text-sm mt-2 leading-relaxed line-clamp-2">

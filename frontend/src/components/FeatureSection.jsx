@@ -74,7 +74,7 @@ export default function FeatureSection() {
                 className="max-w-3xl text-center mb-12"
             >
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    Meus <span className="text-blue-500">Projetos</span>
+                    Meus <span className="text-brand-500">Projetos</span>
                 </h2>
                 <p className="text-lg text-gray-400">
                     Navegue pelo meu repositório de desenvolvimento Back-end e Jogos.
@@ -135,7 +135,7 @@ export default function FeatureSection() {
                                     />
                                 ) : (
                                     <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                                        <span className="text-gray-500 text-sm group-hover:text-blue-400 transition-colors">
+                                        <span className="text-gray-500 text-sm group-hover:text-brand-400 transition-colors">
                                             <Lottie
                                                 animationData={Error404}
                                                 loop={true}
@@ -147,7 +147,7 @@ export default function FeatureSection() {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                     <span className="text-white font-bold text-sm flex items-center gap-2">
-                                        Explorar <span className="text-blue-400">→</span>
+                                        Explorar <span className="text-brand-400">→</span>
                                     </span>
                                 </div>
                             </motion.div>
@@ -170,7 +170,7 @@ export default function FeatureSection() {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-blue-500 w-8" : "bg-gray-700 hover:bg-gray-500"}`}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-brand-500 w-8" : "bg-gray-700 hover:bg-gray-500"}`}
                     />
                 ))}
             </div>

@@ -48,9 +48,8 @@ const ContactForm = () => {
       className="w-full py-20 px-4 md:px-8 flex items-center justify-center bg-transparent"
     >
       <div className="w-full max-w-3xl backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/5 rounded-2xl shadow-xl p-8 relative overflow-hidden">
-        {/* Decorative background elements for Glassmorphism */}
-        <div className="absolute -top-16 -right-16 w-48 h-48 bg-blue-500/20 dark:bg-blue-600/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" />
-        <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-purple-500/20 dark:bg-purple-600/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute -top-16 -right-16 w-48 h-48 bg-brand-500/20 dark:bg-brand-600/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" />
+        <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-brand-300/20 dark:bg-brand-400/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         <div className="relative z-10">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">Entre em Contato</h2>
@@ -67,7 +66,7 @@ const ContactForm = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
                   placeholder="Seu nome"
                 />
               </div>
@@ -81,7 +80,7 @@ const ContactForm = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
                   placeholder="seu@email.com"
                 />
               </div>
@@ -96,7 +95,7 @@ const ContactForm = () => {
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 resize-none backdrop-blur-sm shadow-sm"
+                className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 resize-none backdrop-blur-sm shadow-sm"
                 placeholder="Como posso te ajudar?"
               />
             </div>
@@ -106,7 +105,7 @@ const ContactForm = () => {
               whileTap={{ scale: 0.98 }}
               disabled={status === 'sending'}
               type="submit"
-              className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed group"
+              className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white font-medium shadow-lg shadow-brand-500/20 transition-all flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed group"
             >
               {status === 'sending' ? (
                 <div className="flex items-center gap-2">

@@ -38,12 +38,12 @@ export default function BlogPostView() {
         <div className="min-h-screen bg-[#0b0c10] flex flex-col justify-center items-center gap-4">
             <h1 className="text-2xl font-bold text-red-500">404</h1>
             <p className="text-gray-400">{errorMsg}</p>
-            <Link to="/blog" className="text-blue-400 hover:text-blue-300 transition-colors">Voltar aos Arquivos</Link>
+            <Link to="/blog" className="text-brand-400 hover:text-brand-300 transition-colors">Voltar aos Arquivos</Link>
         </div>
     )
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-gray-300 font-sans selection:bg-blue-500/30">
+        <div className="w-full min-h-screen bg-[#0b0c10] text-gray-300 font-sans selection:bg-brand-500/30">
             <Navbar />
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
@@ -66,7 +66,7 @@ export default function BlogPostView() {
                         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
                             {post.title}
                         </h1>
-                        <div className="flex items-center justify-center md:justify-start gap-3 text-blue-400 font-mono text-sm opacity-80">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-brand-400 font-mono text-sm opacity-80">
                             <time>
                                 {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
                                     day: '2-digit', month: 'long', year: 'numeric'
@@ -78,7 +78,7 @@ export default function BlogPostView() {
                     </header>
 
                     {/* A tipografia Typography no seu esplendor máximo: */}
-                    <div className="prose prose-invert prose-blue max-w-none prose-p:leading-loose prose-pre:bg-[#07080b] prose-pre:border prose-pre:border-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-md">
+                    <div className="prose prose-invert prose-brand max-w-none prose-p:leading-loose prose-pre:bg-[#07080b] prose-pre:border prose-pre:border-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline prose-md">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.content}
                         </ReactMarkdown>

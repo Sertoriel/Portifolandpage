@@ -41,7 +41,7 @@ export default function ProjectDetails() {
             <div className="w-full min-h-screen bg-[#0b0c10] flex flex-col items-center justify-center text-white">
                 <h2 className="text-3xl font-bold text-red-500 mb-4">Erro</h2>
                 <p className="text-gray-400">{errorMsg || "Projeto não encontrado."}</p>
-                <button onClick={() => navigate(-1)} className="mt-8 text-blue-400 hover:underline cursor-pointer">← Voltar</button>
+                <button onClick={() => navigate(-1)} className="mt-8 text-brand-400 hover:underline cursor-pointer">← Voltar</button>
             </div>
         )
     }
@@ -62,7 +62,7 @@ export default function ProjectDetails() {
                 animate={{ opacity: 1, y: 0 }}
                 className="max-w-4xl mx-auto"
             >
-                <span className={`font-bold tracking-wider uppercase ${project.colorClass || 'text-blue-400'}`}>
+                <span className={`font-bold tracking-wider uppercase ${project.colorClass || 'text-brand-400'}`}>
                     {project.category}
                 </span>
 
@@ -72,7 +72,7 @@ export default function ProjectDetails() {
 
                 <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl">
 
-                    <article className="prose prose-invert prose-blue max-w-none mb-8 text-gray-300">
+                    <article className="prose prose-invert prose-brand max-w-none mb-8 text-gray-300">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {project.fullDescription}
                         </ReactMarkdown>
@@ -80,7 +80,7 @@ export default function ProjectDetails() {
 
                     <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-800">
                         {project.githubLink && (
-                            <a href={project.githubLink} target="_blank" rel="noreferrer" className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-colors cursor-pointer">
+                            <a href={project.githubLink} target="_blank" rel="noreferrer" className="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-colors cursor-pointer">
                                 Acessar Repositório (GitHub)
                             </a>
                         )}

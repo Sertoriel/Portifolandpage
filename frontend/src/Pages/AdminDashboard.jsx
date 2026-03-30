@@ -178,13 +178,13 @@ export default function AdminDashboard() {
                 <div className="flex bg-gray-900 border border-gray-800 rounded-xl p-1 mb-8 shadow-inner">
                     <button 
                         onClick={() => setActiveTab('projects')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
                     >
                         📁 Gestão de Projetos
                     </button>
                     <button 
                         onClick={() => setActiveTab('blog')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
                     >
                         📝 Gestão do Blog
                     </button>
@@ -196,7 +196,7 @@ export default function AdminDashboard() {
                     <div className="animate-in fade-in zoom-in-95 duration-300">
                         {/* Status Message */}
                         {status.message && (
-                            <div className={`p-4 mb-6 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-blue-900/50 text-blue-400 border border-blue-800'}`}>
+                            <div className={`p-4 mb-6 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-brand-900/50 text-brand-400 border border-brand-800'}`}>
                                 {status.message}
                             </div>
                         )}
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
                 <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 mb-12 relative">
                     {/* Badge indicando se é edição */}
                     {editingId && (
-                        <div className="absolute -top-4 left-8 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                        <div className="absolute -top-4 left-8 bg-brand-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                             Modo de Edição Ativo
                         </div>
                     )}
@@ -213,43 +213,43 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Título do Projeto *</label>
-                            <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                            <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Categoria *</label>
-                            <input required type="text" name="category" value={formData.category} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                            <input required type="text" name="category" value={formData.category} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Descrição Curta *</label>
-                        <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                        <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
 
                         <div className="flex flex-col gap-2 md:col-span-2">
                             <label className="text-sm font-bold text-gray-300 flex items-center justify-between">
                                 Descrição Completa do Projeto
-                                <span className="text-xs font-normal text-blue-400 bg-blue-900/30 px-2 py-1 rounded-full flex items-center gap-1">
+                                <span className="text-xs font-normal text-brand-400 bg-brand-900/30 px-2 py-1 rounded-full flex items-center gap-1">
                                     <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"/></svg>
                                     Suporta Markdown (Estilo Obsidian)
                                 </span>
                             </label>
-                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm leading-relaxed"></textarea>
+                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
                         </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Tecnologias (Vírgula)</label>
-                        <input type="text" name="techs" value={formData.techs} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                        <input type="text" name="techs" value={formData.techs} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
 
                     {/* SESSÃO HÍBRIDA DA IMAGEM */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-xl border border-blue-500/20 bg-blue-900/10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-xl border border-brand-500/20 bg-brand-900/10">
                         <div className="flex flex-col gap-2 relative">
-                            <label className="text-sm font-bold text-blue-300 flex justify-between">
+                            <label className="text-sm font-bold text-brand-300 flex justify-between">
                                 Thumbnail Web Link
                                 {formData.image && <span className="text-xs font-normal text-yellow-500">(Desativado por Upload)</span>}
                             </label>
-                            <input disabled={!!formData.image} type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} placeholder="https://..." className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+                            <input disabled={!!formData.image} type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} placeholder="https://..." className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-all" />
                         </div>
                         <div className="flex flex-col gap-2 relative">
                             <label className="text-sm font-bold text-purple-300 flex justify-between">
@@ -270,16 +270,16 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">GitHub Link</label>
-                            <input type="url" name="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                            <input type="url" name="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Download Link</label>
-                            <input type="url" name="downloadLink" value={formData.downloadLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                            <input type="url" name="downloadLink" value={formData.downloadLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                     </div>
 
                     <div className="flex gap-4 mt-4">
-                        <button type="submit" disabled={status.loading} className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all ${status.loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-500 cursor-pointer shadow-[0_0_20px_rgba(37,99,235,0.4)]'}`}>
+                        <button type="submit" disabled={status.loading} className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all ${status.loading ? 'bg-gray-600' : 'bg-brand-600 hover:bg-brand-500 cursor-pointer shadow-[0_0_20px_rgba(79,134,95,0.4)]'}`}>
                             {status.loading ? 'Salvando...' : editingId ? 'Salvar Alterações' : 'Publicar Novo Projeto'}
                         </button>
 
@@ -312,7 +312,7 @@ export default function AdminDashboard() {
                                 <div className="flex gap-3 w-full md:w-auto">
                                     <button
                                         onClick={() => startEdit(proj)}
-                                        className="flex-1 md:flex-none px-6 py-2 bg-blue-900/30 text-blue-400 hover:bg-blue-600 hover:text-white border border-blue-800 rounded-lg font-bold transition-all cursor-pointer"
+                                        className="flex-1 md:flex-none px-6 py-2 bg-brand-900/30 text-brand-400 hover:bg-brand-600 hover:text-white border border-brand-800 rounded-lg font-bold transition-all cursor-pointer"
                                     >
                                         Editar
                                     </button>

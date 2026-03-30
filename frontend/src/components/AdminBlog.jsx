@@ -120,14 +120,14 @@ export default function AdminBlog() {
     return (
         <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300">
             {status.message && (
-                <div className={`p-4 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-blue-900/50 text-blue-400 border border-blue-800'}`}>
+                <div className={`p-4 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-brand-900/50 text-brand-400 border border-brand-800'}`}>
                     {status.message}
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 relative">
                 {editingId && (
-                    <div className="absolute -top-4 left-8 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                    <div className="absolute -top-4 left-8 bg-brand-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                         Modo de Edição Ativo
                     </div>
                 )}
@@ -135,31 +135,31 @@ export default function AdminBlog() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Título do Artigo *</label>
-                        <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                        <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-bold text-gray-400 flex justify-between">
                             Url Amigável (Slug)
                             <span className="text-xs text-gray-500 font-normal">Automático se Vazio</span>
                         </label>
-                        <input type="text" name="slug" value={formData.slug} onChange={handleChange} placeholder="ex: como-usei-csharp" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm" />
+                        <input type="text" name="slug" value={formData.slug} onChange={handleChange} placeholder="ex: como-usei-csharp" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm" />
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                     <label className="text-sm text-gray-400">Resumo * (Aparecerá na Aba Principal)</label>
-                    <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                    <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     <span className="text-xs text-gray-600 self-end">{formData.summary.length}/200</span>
                 </div>
 
                 <div className="flex flex-col gap-2">
                     <label className="text-sm font-bold text-gray-300 flex items-center justify-between">
                         Corpo do Artigo *
-                        <span className="text-xs font-normal text-blue-400 bg-blue-900/30 px-2 py-1 rounded-full">
+                        <span className="text-xs font-normal text-brand-400 bg-brand-900/30 px-2 py-1 rounded-full">
                             Suporta Markdown
                         </span>
                     </label>
-                    <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência do Clean Code&#10;&#10;Use formatação Markdown para deixar o post bonito." className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm leading-relaxed"></textarea>
+                    <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência do Clean Code&#10;&#10;Use formatação Markdown para deixar o post bonito." className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
                 </div>
 
                 <div className="flex items-center gap-3 p-4 border border-yellow-700/50 bg-yellow-900/20 rounded-lg">
@@ -170,7 +170,7 @@ export default function AdminBlog() {
                 </div>
 
                 <div className="flex gap-4 mt-4">
-                    <button type="submit" disabled={status.loading} className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all ${status.loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-500 cursor-pointer shadow-[0_0_20px_rgba(37,99,235,0.4)]'}`}>
+                    <button type="submit" disabled={status.loading} className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all ${status.loading ? 'bg-gray-600' : 'bg-brand-600 hover:bg-brand-500 cursor-pointer shadow-[0_0_20px_rgba(79,134,95,0.4)]'}`}>
                         {status.loading ? 'Salvando...' : editingId ? 'Salvar Alterações' : 'Publicar Artigo'}
                     </button>
 
@@ -188,18 +188,18 @@ export default function AdminBlog() {
                     <p className="text-gray-500 text-center py-8">Você ainda não escreveu nenhum artigo.</p>
                 ) : (
                     postsList.map((post) => (
-                        <div key={post.id} className="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-900/50 transition-colors">
+                        <div key={post.id} className="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-900/50 transition-colors">
                             <div className="flex-1 w-full">
                                 <div className="flex items-center gap-3 mb-2 flex-wrap">
                                     <h3 className={`text-xl font-bold ${post.isDraft ? 'text-gray-400 line-through' : 'text-white'}`}>{post.title}</h3>
                                     {post.isDraft && <span className="text-xs bg-yellow-900 text-yellow-500 px-2 py-1 rounded font-bold uppercase tracking-wider">Rascunho</span>}
-                                    <span className="text-xs text-blue-400 font-mono">/{post.slug}</span>
+                                    <span className="text-xs text-brand-400 font-mono">/{post.slug}</span>
                                 </div>
                                 <p className="text-sm text-gray-500">{new Date(post.publishedAt).toLocaleDateString('pt-BR')}</p>
                             </div>
 
                             <div className="flex gap-3 w-full md:w-auto">
-                                <button onClick={() => startEdit(post)} className="flex-1 md:flex-none px-6 py-2 bg-blue-900/30 text-blue-400 border border-blue-800 rounded-lg font-bold hover:bg-blue-600 hover:text-white transition-all cursor-pointer">
+                                <button onClick={() => startEdit(post)} className="flex-1 md:flex-none px-6 py-2 bg-brand-900/30 text-brand-400 border border-brand-800 rounded-lg font-bold hover:bg-brand-600 hover:text-white transition-all cursor-pointer">
                                     Editar
                                 </button>
                                 <button onClick={() => handleDelete(post.id, post.title)} className="flex-1 md:flex-none px-6 py-2 bg-red-900/30 text-red-400 border border-red-800 rounded-lg font-bold hover:bg-red-600 hover:text-white transition-all cursor-pointer">

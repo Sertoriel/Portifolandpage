@@ -22,13 +22,13 @@ export default function Footer() {
                     className="flex gap-6"
                 >
                     {/* Substitua os '#' pelos seus links reais */}
-                    <a href="https://github.com/Sertoriel" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors font-bold tracking-wider text-sm uppercase">
+                    <a href="https://github.com/Sertoriel" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-brand-400 transition-colors font-bold tracking-wider text-sm uppercase">
                         GitHub
                     </a>
-                    <a href="https://www.linkedin.com/in/joao-arthur-duarte/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors font-bold tracking-wider text-sm uppercase">
+                    <a href="https://www.linkedin.com/in/joao-arthur-duarte/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-brand-400 transition-colors font-bold tracking-wider text-sm uppercase">
                         LinkedIn
                     </a>
-                    <a href="mailto:jotaduarfar@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors font-bold tracking-wider text-sm uppercase">
+                    <a href="mailto:jotaduarfar@gmail.com" className="text-gray-400 hover:text-brand-400 transition-colors font-bold tracking-wider text-sm uppercase">
                         Email
                     </a>
                 </motion.div>
