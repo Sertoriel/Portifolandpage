@@ -12,6 +12,9 @@ public class AppDbContext : DbContext
     // Isso diz ao EF Core para criar uma tabela chamada "Projects"
     public DbSet<Project> Projects { get; set; }
 
+    // Tabela do Novo Blog
+    public DbSet<BlogPost> BlogPosts { get; set; }
+
     // Vamos inserir alguns dados falsos (Seed) para você já ter o que mostrar no Front
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

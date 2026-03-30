@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion'
 import Lottie from 'lottie-react'
+import { useNavigate } from 'react-router'
 
 /* Animations */
 import AIanimation from '../assets/AI.json'
 
 export default function Hero() {
+    const navigate = useNavigate()
+
     // Função para o botão principal rolar até os projetos
     const scrollToProjects = () => {
         const element = document.getElementById('projetos')
@@ -56,13 +59,19 @@ export default function Hero() {
                         >
                             Explorar Projetos ↓
                         </button>
+                        <button 
+                            onClick={() => navigate('/blog')}
+                            className="px-8 py-4 bg-gray-900 border border-gray-700 hover:bg-gray-800 hover:border-blue-500/50 hover:text-blue-300 text-gray-300 rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
+                        >
+                            Ler Artigos 📝
+                        </button>
                         <a 
                             href="https://github.com/sertoriel" 
                             target="_blank" 
                             rel="noreferrer"
-                            className="px-8 py-4 bg-gray-900 hover:bg-gray-800 border border-gray-700 text-white rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
+                            className="px-8 py-4 bg-[#0b0c10] border border-gray-800 hover:bg-gray-900 text-gray-400 hover:text-white rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
                         >
-                            Ver GitHub
+                            GitHub
                         </a>
                     </div>
                 </motion.div>

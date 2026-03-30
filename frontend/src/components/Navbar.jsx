@@ -39,18 +39,19 @@ export default function Navbar() {
                             <>
                                 <button onClick={() => scrollToSection('hero')} className="hover:text-blue-400 transition-colors cursor-pointer">Início</button>
                                 <button onClick={() => scrollToSection('projetos')} className="hover:text-blue-400 transition-colors cursor-pointer">Projetos</button>
+                                <button onClick={() => scrollToSection('contato')} className="hover:text-blue-400 transition-colors cursor-pointer">Contato</button>
                             </>
                         ) : (
                             <Link to="/" className="hover:text-blue-400 transition-colors cursor-pointer">Voltar para a Home</Link>
                         )}
                     </div>
 
-                    {/* O seu botão agora leva para a área de Login/Admin */}
+                    {/* O seu botão de destaque agora promove o Blog ao invés da tela Admin */}
                     <button
-                        onClick={() => navigate('/admin')}
+                        onClick={() => navigate('/blog')}
                         className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(37,99,235,0.6)] cursor-pointer"
                     >
-                        Admin
+                        Ver Artigos 📝
                     </button>
                 </div>
 

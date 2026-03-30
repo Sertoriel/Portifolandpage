@@ -4,6 +4,8 @@ import Home from './Pages/Home'
 import ProjectDetails from './Pages/ProjectDetails'
 import AdminDashboard from './Pages/AdminDashboard'
 import Login from './Pages/Login'
+import BlogList from './Pages/BlogList'
+import BlogPostView from './Pages/BlogPostView'
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
 
         {/* Rota para o painel administrativo */}
         <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* Novas rotas do Motor de Blog */}
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPostView />} />
       </Routes>
     </BrowserRouter>
   )

@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router'
 import Navbar from '../components/Navbar'
+import AdminBlog from '../components/AdminBlog'
 
 export default function AdminDashboard() {
     const navigate = useNavigate()
 
     const [projectsList, setProjectsList] = useState([]) // Lista de projetos cadastrados
     const [editingId, setEditingId] = useState(null) // Controla se estamos criando ou editando
+    
+    // Controlador das Tabs do super Painel Administrativo
+    const [activeTab, setActiveTab] = useState('projects') // 'projects' ou 'blog'
 
     const [formData, setFormData] = useState({
         title: '', category: '', shortDescription: '', fullDescription: '',
@@ -170,12 +174,32 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
-                {/* Status Message */}
-                {status.message && (
-                    <div className={`p-4 mb-6 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-blue-900/50 text-blue-400 border border-blue-800'}`}>
-                        {status.message}
-                    </div>
-                )}
+                {/* TAB SWITCHER */}
+                <div className="flex bg-gray-900 border border-gray-800 rounded-xl p-1 mb-8 shadow-inner">
+                    <button 
+                        onClick={() => setActiveTab('projects')}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                    >
+                        📁 Gestão de Projetos
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('blog')}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                    >
+                        📝 Gestão do Blog
+                    </button>
+                </div>
+
+                {activeTab === 'blog' && <AdminBlog />}
+
+                {activeTab === 'projects' && (
+                    <div className="animate-in fade-in zoom-in-95 duration-300">
+                        {/* Status Message */}
+                        {status.message && (
+                            <div className={`p-4 mb-6 rounded-lg font-bold ${status.type === 'success' ? 'bg-green-900/50 text-green-400 border border-green-800' : status.type === 'error' ? 'bg-red-900/50 text-red-400 border border-red-800' : 'bg-blue-900/50 text-blue-400 border border-blue-800'}`}>
+                                {status.message}
+                            </div>
+                        )}
 
                 {/* FORMULÁRIO */}
                 <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 mb-12 relative">
@@ -303,6 +327,8 @@ export default function AdminDashboard() {
                         ))
                     )}
                 </div>
+                </div>
+            )}
 
             </motion.div>
         </div>
