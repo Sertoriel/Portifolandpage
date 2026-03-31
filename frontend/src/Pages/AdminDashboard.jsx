@@ -153,7 +153,7 @@ export default function AdminDashboard() {
     }
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-white p-8 md:p-16 font-sans">
+        <div className="w-full min-h-screen bg-transparent text-white p-8 md:p-16 font-sans">
             <Navbar />
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto mt-20">

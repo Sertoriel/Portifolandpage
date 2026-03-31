@@ -42,7 +42,7 @@ export default function Login() {
     }
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-white flex flex-col items-center justify-center font-sans">
+        <div className="w-full min-h-screen bg-transparent text-white flex flex-col items-center justify-center font-sans">
             <Navbar />
 
             <motion.div

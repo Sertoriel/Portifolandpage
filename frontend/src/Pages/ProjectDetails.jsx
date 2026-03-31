@@ -33,12 +33,12 @@ export default function ProjectDetails() {
     }, [id])
 
     if (isLoading) {
-        return <div className="w-full min-h-screen bg-[#0b0c10] flex items-center justify-center text-white">Carregando documentação...</div>
+        return <div className="w-full min-h-screen bg-transparent flex items-center justify-center text-white">Carregando documentação...</div>
     }
 
     if (errorMsg !== "" || !project) {
         return (
-            <div className="w-full min-h-screen bg-[#0b0c10] flex flex-col items-center justify-center text-white">
+            <div className="w-full min-h-screen bg-transparent flex flex-col items-center justify-center text-white">
                 <h2 className="text-3xl font-bold text-red-500 mb-4">Erro</h2>
                 <p className="text-gray-400">{errorMsg || "Projeto não encontrado."}</p>
                 <button onClick={() => navigate(-1)} className="mt-8 text-brand-400 hover:underline cursor-pointer">← Voltar</button>
@@ -47,7 +47,7 @@ export default function ProjectDetails() {
     }
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-white p-8 md:p-16 font-sans">
+        <div className="w-full min-h-screen bg-transparent text-white p-8 md:p-16 font-sans">
             <Navbar />
 
             <button

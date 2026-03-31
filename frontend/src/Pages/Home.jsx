@@ -7,7 +7,7 @@ import ContactForm from '../components/ContactForm'
 
 export default function Home() {
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] overflow-hidden font-sans">
+        <div className="w-full min-h-screen bg-transparent overflow-hidden font-sans">
             <Navbar />
 
             <div id="hero">

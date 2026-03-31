@@ -42,12 +42,12 @@ export default function FeatureSection() {
 
     // --- TRAVAS DE SEGURANÇA ---
     if (isLoading) {
-        return <div className="w-full min-h-screen flex items-center justify-center bg-[#0b0c10] text-white z-20 relative">Carregando projetos do servidor...</div>
+        return <div className="w-full min-h-screen flex items-center justify-center bg-transparent text-white z-20 relative">Carregando projetos do servidor...</div>
     }
 
     if (errorMsg !== "") {
         return (
-            <div className="w-full min-h-screen flex flex-col items-center justify-center bg-[#0b0c10] z-20 relative text-white">
+            <div className="w-full min-h-screen flex flex-col items-center justify-center bg-transparent z-20 relative text-white">
                 <h2 className="text-3xl font-bold text-red-500 mb-4">Erro de Conexão</h2>
                 <p className="text-gray-400">{errorMsg}</p>
                 <p className="text-sm text-gray-500 mt-2">Dica: O servidor .NET está rodando na porta 5000?</p>
@@ -57,7 +57,7 @@ export default function FeatureSection() {
 
     if (!projects || projects.length === 0) {
         return (
-            <div className="w-full min-h-screen flex flex-col items-center justify-center bg-[#0b0c10] z-20 relative text-white">
+            <div className="w-full min-h-screen flex flex-col items-center justify-center bg-transparent z-20 relative text-white">
                 <h2 className="text-3xl text-white mb-4">Nenhum projeto encontrado.</h2>
                 <p className="text-gray-400">O banco de dados do .NET está vazio.</p>
             </div>
@@ -65,7 +65,7 @@ export default function FeatureSection() {
     }
 
     return (
-        <section className="w-full min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-[#0b0c10] relative z-20">
+        <section className="w-full min-h-screen flex flex-col items-center justify-center px-6 py-24 bg-transparent relative z-20">
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

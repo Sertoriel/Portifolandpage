@@ -21,7 +21,7 @@ export default function BlogList() {
     }, [])
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-gray-300 font-sans">
+        <div className="w-full min-h-screen bg-transparent text-gray-300 font-sans">
             <Navbar />
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-16">

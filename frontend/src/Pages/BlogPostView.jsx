@@ -32,10 +32,10 @@ export default function BlogPostView() {
             })
     }, [slug])
 
-    if (isLoading) return <div className="min-h-screen bg-[#0b0c10] text-gray-500 flex justify-center items-center">Buscando do repositório...</div>
+    if (isLoading) return <div className="min-h-screen bg-transparent text-gray-500 flex justify-center items-center">Buscando do repositório...</div>
 
     if (errorMsg || !post) return (
-        <div className="min-h-screen bg-[#0b0c10] flex flex-col justify-center items-center gap-4">
+        <div className="min-h-screen bg-transparent flex flex-col justify-center items-center gap-4">
             <h1 className="text-2xl font-bold text-red-500">404</h1>
             <p className="text-gray-400">{errorMsg}</p>
             <Link to="/blog" className="text-brand-400 hover:text-brand-300 transition-colors">Voltar aos Arquivos</Link>
@@ -43,7 +43,7 @@ export default function BlogPostView() {
     )
 
     return (
-        <div className="w-full min-h-screen bg-[#0b0c10] text-gray-300 font-sans selection:bg-brand-500/30">
+        <div className="w-full min-h-screen bg-transparent text-gray-300 font-sans selection:bg-brand-500/30">
             <Navbar />
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">

@@ -6,12 +6,15 @@ import AdminDashboard from './Pages/AdminDashboard'
 import Login from './Pages/Login'
 import BlogList from './Pages/BlogList'
 import BlogPostView from './Pages/BlogPostView'
+import LayoutBackground from './components/LayoutBackground'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Rota principal (A Landing Page) */}
+    <>
+      <LayoutBackground />
+      <BrowserRouter>
+        <Routes>
+          {/* Rota principal (A Landing Page) */}
         <Route path="/" element={<Home />} />
         
         {/* Rota dinâmica (A página de detalhes esperando um ID) */}
@@ -28,6 +31,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPostView />} />
       </Routes>
     </BrowserRouter>
+    </>
   )
 }
 
