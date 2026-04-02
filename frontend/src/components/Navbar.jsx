@@ -22,7 +22,7 @@ export default function Navbar() {
             transition={{ type: 'spring', stiffness: 100, damping: 20 }}
             className="fixed top-0 left-0 w-full z-50 px-6 py-4"
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between bg-gray-900/40 backdrop-blur-md border border-gray-700/50 rounded-2xl px-6 py-3 shadow-lg">
+            <div className="max-w-7xl mx-auto flex items-center justify-between bg-brand-900/40 backdrop-blur-md border border-brand-700/50 rounded-2xl px-6 py-3 shadow-lg">
 
                 <Link to="/" className="text-xl font-bold text-white tracking-wider flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <img

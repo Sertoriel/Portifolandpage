@@ -55,7 +55,7 @@ export default function BlogPostView() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
-                    <header className="mb-12 border-b border-gray-800 pb-8 text-center md:text-left">
+                    <header className="mb-12 border-b border-brand-800 pb-8 text-center md:text-left">
                         {post.isDraft && (
                             <div className="mb-4">
                                 <span className="inline-block bg-yellow-900/40 border border-yellow-700/50 text-yellow-500 text-xs tracking-wider uppercase font-bold px-3 py-1 rounded-sm">
@@ -72,13 +72,13 @@ export default function BlogPostView() {
                                     day: '2-digit', month: 'long', year: 'numeric'
                                 })}
                             </time>
-                            <span className="text-gray-700">/</span>
+                            <span className="text-brand-700">/</span>
                             <span>{Math.max(1, Math.ceil(post.content.length / 800))} min read</span>
                         </div>
                     </header>
 
                     {/* A tipografia Typography no seu esplendor máximo: */}
-                    <div className="prose prose-invert prose-brand max-w-none prose-p:leading-loose prose-pre:bg-[#07080b] prose-pre:border prose-pre:border-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline prose-md">
+                    <div className="prose prose-invert prose-brand max-w-none prose-p:leading-loose prose-pre:bg-[#07080b] prose-pre:border prose-pre:border-brand-800 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline prose-md">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.content}
                         </ReactMarkdown>

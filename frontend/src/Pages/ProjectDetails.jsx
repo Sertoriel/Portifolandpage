@@ -70,7 +70,7 @@ export default function ProjectDetails() {
                     {project.title}
                 </h1>
 
-                <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl">
+                <div className="bg-brand-900 border border-brand-800 rounded-2xl p-8 shadow-2xl">
 
                     <article className="prose prose-invert prose-brand max-w-none mb-8 text-gray-300">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -78,14 +78,14 @@ export default function ProjectDetails() {
                         </ReactMarkdown>
                     </article>
 
-                    <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-800">
+                    <div className="flex flex-wrap gap-4 pt-6 border-t border-brand-800">
                         {project.githubLink && (
                             <a href={project.githubLink} target="_blank" rel="noreferrer" className="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-colors cursor-pointer">
                                 Acessar Repositório (GitHub)
                             </a>
                         )}
                         {project.downloadLink && (
-                            <a href={project.downloadLink} target="_blank" rel="noreferrer" className="px-6 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-bold rounded-lg transition-colors cursor-pointer">
+                            <a href={project.downloadLink} target="_blank" rel="noreferrer" className="px-6 py-3 bg-brand-800 hover:bg-brand-700 border border-brand-700 text-white font-bold rounded-lg transition-colors cursor-pointer">
                                 Baixar Build / Executável
                             </a>
                         )}

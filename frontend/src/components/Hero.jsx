@@ -36,7 +36,7 @@ export default function Hero() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="px-4 py-2 mb-6 bg-gray-900 border border-gray-700 rounded-full text-sm md:text-base text-gray-300 font-medium shadow-lg inline-block"
+                        className="px-4 py-2 mb-6 bg-brand-900 border border-brand-700 rounded-full text-sm md:text-base text-gray-300 font-medium shadow-lg inline-block"
                     >
                         🚀 Welcome to the Backend & Game Dev realm
                     </motion.div>
@@ -61,7 +61,7 @@ export default function Hero() {
                         </button>
                         <button
                             onClick={() => navigate('/blog')}
-                            className="px-8 py-4 bg-gray-900 border border-brand-900 hover:bg-gray-800 hover:border-brand-500/50 hover:text-brand-300 text-gray-300 rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
+                            className="px-8 py-4 bg-brand-900 border border-brand-900 hover:bg-brand-800 hover:border-brand-500/50 hover:text-brand-300 text-gray-300 rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
                         >
                             Ler Artigos 📝
                         </button>
@@ -69,7 +69,7 @@ export default function Hero() {
                             href="https://github.com/sertoriel"
                             target="_blank"
                             rel="noreferrer"
-                            className="px-8 py-4 bg-[#0b0c10] border border-gray-800 hover:bg-gray-900 text-gray-400 hover:text-white rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
+                            className="px-8 py-4 bg-[#010302] border border-brand-800 hover:bg-brand-900 text-gray-400 hover:text-white rounded-xl font-bold text-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
                         >
                             GitHub
                         </a>

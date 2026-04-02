@@ -84,7 +84,7 @@ export default function FeatureSection() {
             <div className="relative w-full max-w-4xl flex items-center justify-center">
                 <button
                     onClick={prevSlide}
-                    className="absolute left-0 z-30 p-3 bg-gray-900 border border-gray-700 rounded-full text-white hover:bg-gray-800 hover:scale-110 transition-all cursor-pointer shadow-lg"
+                    className="absolute left-0 z-30 p-3 bg-brand-900 border border-brand-700 rounded-full text-white hover:bg-brand-800 hover:scale-110 transition-all cursor-pointer shadow-lg"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -99,7 +99,7 @@ export default function FeatureSection() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -100 }}
                             transition={{ duration: 0.4, type: 'spring', bounce: 0.2 }}
-                            className={`bg-gray-900/50 border ${projects[currentIndex].bgBorderClass} backdrop-blur-sm rounded-3xl p-8 md:p-12 w-full flex flex-col md:flex-row gap-8 items-center justify-between shadow-2xl`}
+                            className={`bg-brand-900/50 border ${projects[currentIndex].bgBorderClass} backdrop-blur-sm rounded-3xl p-8 md:p-12 w-full flex flex-col md:flex-row gap-8 items-center justify-between shadow-2xl`}
                         >
                             <div className="flex-1">
                                 <span className={`text-sm font-bold tracking-wider uppercase ${projects[currentIndex].colorClass}`}>
@@ -114,7 +114,7 @@ export default function FeatureSection() {
 
                                 <div className="flex flex-wrap gap-2">
                                     {projects[currentIndex].techs.map((tech, index) => (
-                                        <span key={index} className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+                                        <span key={index} className="px-3 py-1 bg-brand-800 border border-brand-700 rounded-full text-xs text-gray-300">
                                             {tech}
                                         </span>
                                     ))}
@@ -125,7 +125,7 @@ export default function FeatureSection() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => navigate(`/projeto/${projects[currentIndex].id}`)}
-                                className="w-full md:w-1/2 h-48 md:h-64 border border-gray-700 rounded-2xl relative overflow-hidden group cursor-pointer shadow-lg"
+                                className="w-full md:w-1/2 h-48 md:h-64 border border-brand-700 rounded-2xl relative overflow-hidden group cursor-pointer shadow-lg"
                             >
                                 {projects[currentIndex].thumbnailUrl ? (
                                     <img
@@ -134,7 +134,7 @@ export default function FeatureSection() {
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                 ) : (
-                                    <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                                    <div className="w-full h-full bg-brand-800 flex items-center justify-center">
                                         <span className="text-gray-500 text-sm group-hover:text-brand-400 transition-colors">
                                             <Lottie
                                                 animationData={Error404}
@@ -157,7 +157,7 @@ export default function FeatureSection() {
 
                 <button
                     onClick={nextSlide}
-                    className="absolute right-0 z-30 p-3 bg-gray-900 border border-gray-700 rounded-full text-white hover:bg-gray-800 hover:scale-110 transition-all cursor-pointer shadow-lg"
+                    className="absolute right-0 z-30 p-3 bg-brand-900 border border-brand-700 rounded-full text-white hover:bg-brand-800 hover:scale-110 transition-all cursor-pointer shadow-lg"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -170,7 +170,7 @@ export default function FeatureSection() {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-brand-500 w-8" : "bg-gray-700 hover:bg-gray-500"}`}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-brand-500 w-8" : "bg-brand-700 hover:bg-gray-500"}`}
                     />
                 ))}
             </div>

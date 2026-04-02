@@ -125,7 +125,7 @@ export default function AdminBlog() {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 relative">
+            <form onSubmit={handleSubmit} className="bg-brand-900 border border-brand-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 relative">
                 {editingId && (
                     <div className="absolute -top-4 left-8 bg-brand-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                         Modo de Edição Ativo
@@ -135,20 +135,20 @@ export default function AdminBlog() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Título do Artigo *</label>
-                        <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                        <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-bold text-gray-400 flex justify-between">
                             Url Amigável (Slug)
                             <span className="text-xs text-gray-500 font-normal">Automático se Vazio</span>
                         </label>
-                        <input type="text" name="slug" value={formData.slug} onChange={handleChange} placeholder="ex: como-usei-csharp" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm" />
+                        <input type="text" name="slug" value={formData.slug} onChange={handleChange} placeholder="ex: como-usei-csharp" className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm" />
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                     <label className="text-sm text-gray-400">Resumo * (Aparecerá na Aba Principal)</label>
-                    <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                    <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     <span className="text-xs text-gray-600 self-end">{formData.summary.length}/200</span>
                 </div>
 
@@ -159,7 +159,7 @@ export default function AdminBlog() {
                             Suporta Markdown
                         </span>
                     </label>
-                    <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência do Clean Code&#10;&#10;Use formatação Markdown para deixar o post bonito." className="bg-[#0b0c10] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                    <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência do Clean Code&#10;&#10;Use formatação Markdown para deixar o post bonito." className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
                 </div>
 
                 <div className="flex items-center gap-3 p-4 border border-yellow-700/50 bg-yellow-900/20 rounded-lg">
@@ -175,7 +175,7 @@ export default function AdminBlog() {
                     </button>
 
                     {editingId && (
-                        <button type="button" onClick={cancelEdit} className="px-6 bg-gray-700 hover:bg-gray-600 rounded-xl font-bold cursor-pointer transition-colors">
+                        <button type="button" onClick={cancelEdit} className="px-6 bg-brand-700 hover:bg-gray-600 rounded-xl font-bold cursor-pointer transition-colors">
                             Cancelar
                         </button>
                     )}
@@ -188,7 +188,7 @@ export default function AdminBlog() {
                     <p className="text-gray-500 text-center py-8">Você ainda não escreveu nenhum artigo.</p>
                 ) : (
                     postsList.map((post) => (
-                        <div key={post.id} className="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-900/50 transition-colors">
+                        <div key={post.id} className="bg-brand-900 border border-brand-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-900/50 transition-colors">
                             <div className="flex-1 w-full">
                                 <div className="flex items-center gap-3 mb-2 flex-wrap">
                                     <h3 className={`text-xl font-bold ${post.isDraft ? 'text-gray-400 line-through' : 'text-white'}`}>{post.title}</h3>

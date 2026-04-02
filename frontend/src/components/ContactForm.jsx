@@ -52,13 +52,13 @@ const ContactForm = () => {
         <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-brand-300/20 dark:bg-brand-400/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         <div className="relative z-10">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">Entre em Contato</h2>
+          <h2 className="text-3xl font-bold text-brand-900 dark:text-white mb-2 text-center">Entre em Contato</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 text-center text-sm md:text-base">Tem um projeto em mente? Vamos conversar e transformá-lo em realidade.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label flex htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
+                <label flex htmlFor="name" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">Nome</label>
                 <input
                   type="text"
                   id="name"
@@ -66,13 +66,13 @@ const ContactForm = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
                   placeholder="Seu nome"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
+                <label htmlFor="email" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">E-mail</label>
                 <input
                   type="email"
                   id="email"
@@ -80,14 +80,14 @@ const ContactForm = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
                   placeholder="seu@email.com"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensagem</label>
+              <label htmlFor="message" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">Mensagem</label>
               <textarea
                 id="message"
                 name="message"
@@ -95,7 +95,7 @@ const ContactForm = () => {
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-gray-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 resize-none backdrop-blur-sm shadow-sm"
+                className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 resize-none backdrop-blur-sm shadow-sm"
                 placeholder="Como posso te ajudar?"
               />
             </div>

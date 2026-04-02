@@ -25,7 +25,7 @@ export default function BlogList() {
             <Navbar />
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-16">
-                <header className="mb-12 border-b border-gray-800 pb-6">
+                <header className="mb-12 border-b border-brand-800 pb-6">
                     <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Arquivos</h1>
                     <p className="text-gray-400">Estudos, reflexões profundas e arquitetura de software.</p>
                 </header>
@@ -33,7 +33,7 @@ export default function BlogList() {
                 {isLoading ? (
                     <div className="animate-pulse space-y-6">
                         {[1, 2, 3].map(i => (
-                            <div key={i} className="h-24 bg-gray-800/40 rounded-lg"></div>
+                            <div key={i} className="h-24 bg-brand-800/40 rounded-lg"></div>
                         ))}
                     </div>
                 ) : posts.length === 0 ? (
@@ -46,7 +46,7 @@ export default function BlogList() {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group block p-5 md:p-6 -mx-4 rounded-xl hover:bg-gray-800/30 transition-colors"
+                                className="group block p-5 md:p-6 -mx-4 rounded-xl hover:bg-brand-800/30 transition-colors"
                             >
                                 <Link to={`/blog/${post.slug}`}>
                                     <div className="flex flex-col gap-1 cursor-pointer">

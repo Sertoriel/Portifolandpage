@@ -2,21 +2,21 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Escala gerada exatamente em cima dos valores do 'st palete.png' */
-  --color-brand-300: #88B999; 
-  --color-brand-400: #6BA07D; 
-  --color-brand-500: #4F865F; /* Centro: Leafy Green */
-  --color-brand-600: #256A5E; /* Esquerda: Deep Teal */
-  --color-brand-700: #1B4E45; 
-  --color-brand-800: #1B2921; 
-  --color-brand-900: #133D36; /* Direita: Black/Dark Teal */
+  /* Escala gerada a partir do novo palette.txt */
+  --color-brand-300: #79C3D1; /* Sky Blue (Light) */
+  --color-brand-400: #65AF9D; /* Mix entre Sky e Seagrass */
+  --color-brand-500: #519B89; /* Seagrass */
+  --color-brand-600: #396A5E; /* Deep Teal */
+  --color-brand-700: #304A46; /* Mix Teal/Shadow */
+  --color-brand-800: #272A31; /* Shadow Grey */
+  --color-brand-900: #010302; /* Black da paleta */
   
-  --color-brand-gray: #B9B9B9; /* Prateado/Cinza da paleta */
-  --color-brand-light: #F5F5F5; /* Off-White da paleta */
+  --color-brand-gray: #B9B9B9; 
+  --color-brand-light: #F5F5F5; 
 }
 
 body {
-  background-color: #0b0c10; 
+  background-color: #010302; 
   color: #ffffff;
   overflow-x: hidden;
 }

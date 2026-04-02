@@ -175,16 +175,16 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* TAB SWITCHER */}
-                <div className="flex bg-gray-900 border border-gray-800 rounded-xl p-1 mb-8 shadow-inner">
+                <div className="flex bg-brand-900 border border-brand-800 rounded-xl p-1 mb-8 shadow-inner">
                     <button 
                         onClick={() => setActiveTab('projects')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
                     >
                         📁 Gestão de Projetos
                     </button>
                     <button 
                         onClick={() => setActiveTab('blog')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}`}
+                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
                     >
                         📝 Gestão do Blog
                     </button>
@@ -202,7 +202,7 @@ export default function AdminDashboard() {
                         )}
 
                 {/* FORMULÁRIO */}
-                <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 mb-12 relative">
+                <form onSubmit={handleSubmit} className="bg-brand-900 border border-brand-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-6 mb-12 relative">
                     {/* Badge indicando se é edição */}
                     {editingId && (
                         <div className="absolute -top-4 left-8 bg-brand-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -213,17 +213,17 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Título do Projeto *</label>
-                            <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                            <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Categoria *</label>
-                            <input required type="text" name="category" value={formData.category} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                            <input required type="text" name="category" value={formData.category} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Descrição Curta *</label>
-                        <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                        <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
 
                         <div className="flex flex-col gap-2 md:col-span-2">
@@ -234,12 +234,12 @@ export default function AdminDashboard() {
                                     Suporta Markdown (Estilo Obsidian)
                                 </span>
                             </label>
-                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
                         </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Tecnologias (Vírgula)</label>
-                        <input type="text" name="techs" value={formData.techs} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                        <input type="text" name="techs" value={formData.techs} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
 
                     {/* SESSÃO HÍBRIDA DA IMAGEM */}
@@ -249,7 +249,7 @@ export default function AdminDashboard() {
                                 Thumbnail Web Link
                                 {formData.image && <span className="text-xs font-normal text-yellow-500">(Desativado por Upload)</span>}
                             </label>
-                            <input disabled={!!formData.image} type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} placeholder="https://..." className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-all" />
+                            <input disabled={!!formData.image} type="url" name="thumbnailUrl" value={formData.thumbnailUrl} onChange={handleChange} placeholder="https://..." className="bg-brand-800 disabled:opacity-40 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-all" />
                         </div>
                         <div className="flex flex-col gap-2 relative">
                             <label className="text-sm font-bold text-purple-300 flex justify-between">
@@ -262,7 +262,7 @@ export default function AdminDashboard() {
                                 name="image" 
                                 accept="image/*" 
                                 onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })} 
-                                className="bg-gray-800 disabled:opacity-40 border border-gray-700 rounded-lg p-[9px] text-white focus:outline-none focus:border-purple-500 transition-all cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-500" 
+                                className="bg-brand-800 disabled:opacity-40 border border-brand-700 rounded-lg p-[9px] text-white focus:outline-none focus:border-purple-500 transition-all cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-500" 
                             />
                         </div>
                     </div>
@@ -270,11 +270,11 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">GitHub Link</label>
-                            <input type="url" name="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                            <input type="url" name="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm text-gray-400">Download Link</label>
-                            <input type="url" name="downloadLink" value={formData.downloadLink} onChange={handleChange} className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                            <input type="url" name="downloadLink" value={formData.downloadLink} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                     </div>
 
@@ -285,7 +285,7 @@ export default function AdminDashboard() {
 
                         {/* Se estiver editando, mostra botão de cancelar */}
                         {editingId && (
-                            <button type="button" onClick={cancelEdit} className="px-6 bg-gray-700 hover:bg-gray-600 rounded-xl font-bold cursor-pointer transition-colors">
+                            <button type="button" onClick={cancelEdit} className="px-6 bg-brand-700 hover:bg-gray-600 rounded-xl font-bold cursor-pointer transition-colors">
                                 Cancelar
                             </button>
                         )}
@@ -299,11 +299,11 @@ export default function AdminDashboard() {
                         <p className="text-gray-500 text-center py-8">Nenhum projeto encontrado no banco de dados.</p>
                     ) : (
                         projectsList.map((proj) => (
-                            <div key={proj.id} className="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-gray-600 transition-colors">
+                            <div key={proj.id} className="bg-brand-900 border border-brand-800 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-gray-600 transition-colors">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
                                         <h3 className="text-xl font-bold text-white">{proj.title}</h3>
-                                        <span className="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400 uppercase tracking-wider">{proj.category}</span>
+                                        <span className="text-xs bg-brand-800 px-2 py-1 rounded text-gray-400 uppercase tracking-wider">{proj.category}</span>
                                     </div>
                                     <p className="text-sm text-gray-400 line-clamp-2">{proj.shortDescription}</p>
                                 </div>

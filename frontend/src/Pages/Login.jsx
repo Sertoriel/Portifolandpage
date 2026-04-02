@@ -48,7 +48,7 @@ export default function Login() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-3xl p-8 shadow-2xl z-20"
+                className="w-full max-w-md bg-brand-900 border border-brand-800 rounded-3xl p-8 shadow-2xl z-20"
             >
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-white mb-2">Acesso Restrito</h1>
@@ -70,7 +70,7 @@ export default function Login() {
                             required
                             value={credentials.username}
                             onChange={handleChange}
-                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                            className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
                             placeholder="Digite seu usuário"
                         />
                     </div>
@@ -83,7 +83,7 @@ export default function Login() {
                             required
                             value={credentials.password}
                             onChange={handleChange}
-                            className="bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                            className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
                             placeholder="••••••••"
                         />
                     </div>
