@@ -13,10 +13,15 @@
   
   --color-brand-gray: #B9B9B9; 
   --color-brand-light: #F5F5F5; 
+
+  /* Fontes Customizadas Global */
+  --font-sans: "JetBrains Mono", monospace;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 body {
   background-color: #010302; 
   color: #ffffff;
   overflow-x: hidden;
+  font-family: "JetBrains Mono", monospace;
 }
