@@ -6,7 +6,8 @@ export default function AdminBlog() {
     const [status, setStatus] = useState({ loading: false, message: '', type: '' })
     
     const [formData, setFormData] = useState({
-        title: '', slug: '', summary: '', content: '', isDraft: false
+        title: '', slug: '', summary: '', content: '', isDraft: false,
+        titleEn: '', summaryEn: '', contentEn: ''
     })
 
     useEffect(() => {
@@ -48,9 +49,12 @@ export default function AdminBlog() {
             const payload = {
                 id: editingId || 0,
                 title: formData.title,
+                titleEn: formData.titleEn,
                 slug: formData.slug,
                 summary: formData.summary,
+                summaryEn: formData.summaryEn,
                 content: formData.content,
+                contentEn: formData.contentEn,
                 isDraft: formData.isDraft
             }
 
@@ -73,6 +77,41 @@ export default function AdminBlog() {
         } catch (error) {
             console.error(error)
             setStatus({ loading: false, message: 'Falha na conexão.', type: 'error' })
+        }
+    }
+
+    const handleAutoTranslate = async () => {
+        const token = localStorage.getItem('portfolio_token')
+        setStatus({ loading: true, message: 'Traduzindo Artigo na Nuvem...', type: 'info' })
+        try {
+            const translateField = async (text) => {
+                if (!text) return ''
+                const res = await fetch('http://localhost:5000/api/Translation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ text })
+                })
+                if (res.ok) {
+                    const data = await res.json()
+                    return data.translatedText
+                }
+                return text
+            }
+
+            const transTitle = await translateField(formData.title)
+            const transSummary = await translateField(formData.summary)
+            const transContent = await translateField(formData.content)
+
+            setFormData(prev => ({
+                ...prev,
+                titleEn: transTitle,
+                summaryEn: transSummary,
+                contentEn: transContent
+            }))
+            setStatus({ loading: false, message: 'Sucesso! Blog convertido magicamente.', type: 'success' })
+        } catch (error) {
+            console.error(error)
+            setStatus({ loading: false, message: 'Erro na tradução.', type: 'error' })
         }
     }
 
@@ -102,9 +141,12 @@ export default function AdminBlog() {
         setEditingId(post.id)
         setFormData({
             title: post.title,
+            titleEn: post.titleEn || '',
             slug: post.slug,
             summary: post.summary,
+            summaryEn: post.summaryEn || '',
             content: post.content,
+            contentEn: post.contentEn || '',
             isDraft: post.isDraft
         })
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -113,7 +155,7 @@ export default function AdminBlog() {
 
     const cancelEdit = () => {
         setEditingId(null)
-        setFormData({ title: '', slug: '', summary: '', content: '', isDraft: false })
+        setFormData({ title: '', slug: '', summary: '', content: '', isDraft: false, titleEn: '', summaryEn: '', contentEn: '' })
         setStatus({ loading: false, message: '', type: '' })
     }
 
@@ -131,35 +173,65 @@ export default function AdminBlog() {
                         Modo de Edição Ativo
                     </div>
                 )}
+                
+                {/* Linha Divisória de Tradução */}
+                <div className="flex flex-col md:flex-row items-center justify-between bg-blue-900/20 border border-blue-500/30 p-4 rounded-xl mb-2 gap-4">
+                    <div className="text-sm text-blue-200">
+                        <strong>Tradução Automática:</strong> Escreva tudo em Português e atire a IA!
+                    </div>
+                    <button 
+                        type="button" 
+                        onClick={handleAutoTranslate} 
+                        disabled={status.loading || !formData.title} 
+                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center transition-all disabled:opacity-50 cursor-pointer w-full md:w-auto"
+                    >
+                        ⚡ Auto-Traduzir Artigo
+                    </button>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-400">Título do Artigo *</label>
+                        <label className="text-sm font-bold text-brand-300">Título do Artigo (PT-BR) *</label>
                         <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                     </div>
                     <div className="flex flex-col gap-2">
+                        <label className="text-sm font-bold text-blue-300">Título (EN) *</label>
+                        <input required type="text" name="titleEn" value={formData.titleEn} onChange={handleChange} className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                    </div>
+                    <div className="flex flex-col gap-2 md:col-span-2">
                         <label className="text-sm font-bold text-gray-400 flex justify-between">
-                            Url Amigável (Slug)
-                            <span className="text-xs text-gray-500 font-normal">Automático se Vazio</span>
+                            Url Amigável (Slug) Universal
+                            <span className="text-xs text-brand-500 font-normal">Sempre baseada no titulo PT</span>
                         </label>
                         <input type="text" name="slug" value={formData.slug} onChange={handleChange} placeholder="ex: como-usei-csharp" className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm" />
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <label className="text-sm text-gray-400">Resumo * (Aparecerá na Aba Principal)</label>
-                    <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
-                    <span className="text-xs text-gray-600 self-end">{formData.summary.length}/200</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-2 relative">
+                        <label className="text-sm font-bold text-brand-300">Resumo Principal (PT-BR) *</label>
+                        <input required type="text" name="summary" value={formData.summary} onChange={handleChange} maxLength="200" className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                        <span className="absolute bottom-[-20px] right-2 text-xs text-gray-600">{formData.summary.length}/200</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-bold text-blue-300">Resumo (EN) *</label>
+                        <input required type="text" name="summaryEn" value={formData.summaryEn} onChange={handleChange} className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                    </div>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <label className="text-sm font-bold text-gray-300 flex items-center justify-between">
-                        Corpo do Artigo *
-                        <span className="text-xs font-normal text-brand-400 bg-brand-900/30 px-2 py-1 rounded-full">
-                            Suporta Markdown
-                        </span>
-                    </label>
-                    <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência do Clean Code&#10;&#10;Use formatação Markdown para deixar o post bonito." className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-bold text-brand-300 flex items-center justify-between">
+                            Corpo do Artigo (PT-BR) *
+                        </label>
+                        <textarea required name="content" value={formData.content} onChange={handleChange} rows="15" placeholder="# A essência..." className="bg-[#010302] border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-bold text-blue-300 flex items-center justify-between">
+                            Corpo Master (EN) *
+                        </label>
+                        <textarea required name="contentEn" value={formData.contentEn} onChange={handleChange} rows="15" placeholder="# Translated Content..." className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm leading-relaxed"></textarea>
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-3 p-4 border border-yellow-700/50 bg-yellow-900/20 rounded-lg">

@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function BlogList() {
     const [posts, setPosts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const { t, language } = useLanguage()
 
     useEffect(() => {
         fetch('http://localhost:5000/api/Blog')
@@ -26,8 +28,8 @@ export default function BlogList() {
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-16">
                 <header className="mb-12 border-b border-brand-800 pb-6">
-                    <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Arquivos</h1>
-                    <p className="text-gray-400">Estudos, reflexões profundas e arquitetura de software.</p>
+                    <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">{t('blog_title')}</h1>
+                    <p className="text-gray-400">{t('blog_desc')}</p>
                 </header>
 
                 {isLoading ? (
@@ -37,7 +39,7 @@ export default function BlogList() {
                         ))}
                     </div>
                 ) : posts.length === 0 ? (
-                    <p className="text-gray-500 italic">Nenhuma publicação encontrada no momento.</p>
+                    <p className="text-gray-500 italic">{t('blog_empty')}</p>
                 ) : (
                     <div className="space-y-4">
                         {posts.map((post, index) => (
@@ -52,18 +54,18 @@ export default function BlogList() {
                                     <div className="flex flex-col gap-1 cursor-pointer">
                                         <div className="flex items-center gap-3 text-sm text-brand-400 font-mono mb-1">
                                             <span>
-                                                {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
+                                                {new Date(post.publishedAt).toLocaleDateString(language === 'en' ? 'en-US' : 'pt-BR', {
                                                     day: '2-digit', month: 'short', year: 'numeric'
                                                 })}
                                             </span>
                                             <span className="text-gray-600">•</span>
-                                            <span className="text-gray-500">{Math.max(1, Math.ceil(post.content.length / 800))} min de leitura</span>
+                                            <span className="text-gray-500">{Math.max(1, Math.ceil(post.content.length / 800))} min {language === 'en' ? 'read' : 'de leitura'}</span>
                                         </div>
                                         <h2 className="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-brand-300 transition-colors leading-snug">
-                                            {post.title}
+                                            {language === 'en' && post.titleEn ? post.titleEn : post.title}
                                         </h2>
                                         <p className="text-gray-400 text-sm mt-2 leading-relaxed line-clamp-2">
-                                            {post.summary}
+                                            {language === 'en' && post.summaryEn ? post.summaryEn : post.summary}
                                         </p>
                                     </div>
                                 </Link>

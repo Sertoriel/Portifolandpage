@@ -38,7 +38,22 @@ const dictionary = {
     contact_success: "Mensagem enviada com sucesso! Entrarei em contato em breve.",
     
     footer_rights: "Todos os direitos reservados.",
-    footer_admin: "Acesso Administrativo"
+    footer_admin: "Acesso Administrativo",
+
+    proj_details_loading: "Carregando documentação...",
+    proj_details_error: "Projeto não encontrado",
+    proj_details_back: "← Voltar para o Portfólio",
+    proj_details_repo: "Acessar Repositório (GitHub)",
+    proj_details_download: "Baixar Build / Executável",
+
+    blog_title: "Artigos e Pensamentos",
+    blog_desc: "Escritos sobre tecnologia, tutoriais e ideias em andamento.",
+    blog_read: "Ler Artigo",
+    blog_empty: "Nenhum artigo publicado no momento.",
+    blog_back: "← Voltar para a Home",
+    blog_post_loading: "Carregando postagem...",
+    blog_post_error: "Postagem não encontrada.",
+    blog_post_back: "← Voltar ao Blog"
   },
   en: {
     nav_home: "Home",
@@ -75,7 +90,22 @@ const dictionary = {
     contact_success: "Message sent successfully! I will reach out soon.",
     
     footer_rights: "All rights reserved.",
-    footer_admin: "Admin Access"
+    footer_admin: "Admin Access",
+
+    proj_details_loading: "Loading documentation...",
+    proj_details_error: "Project not found",
+    proj_details_back: "← Back to Portfolio",
+    proj_details_repo: "Access Repository (GitHub)",
+    proj_details_download: "Download Build / Executable",
+
+    blog_title: "Articles and Thoughts",
+    blog_desc: "Writings on technology, tutorials, and ongoing ideas.",
+    blog_read: "Read Article",
+    blog_empty: "No articles published at the moment.",
+    blog_back: "← Back to Home",
+    blog_post_loading: "Loading post...",
+    blog_post_error: "Post not found.",
+    blog_post_back: "← Back to Blog"
   }
 };
 

@@ -19,6 +19,11 @@ namespace Portfol.Api.Models
         [Required]
         public string Content { get; set; } = string.Empty;
         
+        // --- English Translations ---
+        public string? TitleEn { get; set; }
+        public string? SummaryEn { get; set; }
+        public string? ContentEn { get; set; }
+        
         public DateTime PublishedAt { get; set; } = DateTime.UtcNow;
         
         public bool IsDraft { get; set; } = false;

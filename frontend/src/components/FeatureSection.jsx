@@ -13,7 +13,7 @@ export default function FeatureSection() {
     const [errorMsg, setErrorMsg] = useState("")
 
     const navigate = useNavigate()
-    const { t } = useLanguage()
+    const { t, language } = useLanguage()
 
     useEffect(() => {
         fetch('http://localhost:5000/api/Projects')
@@ -104,13 +104,13 @@ export default function FeatureSection() {
                         >
                             <div className="flex-1">
                                 <span className={`text-sm font-bold tracking-wider uppercase ${projects[currentIndex].colorClass}`}>
-                                    {projects[currentIndex].category}
+                                    {language === 'en' && projects[currentIndex].categoryEn ? projects[currentIndex].categoryEn : projects[currentIndex].category}
                                 </span>
                                 <h3 className="text-3xl font-bold text-white mt-2 mb-4">
-                                    {projects[currentIndex].title}
+                                    {language === 'en' && projects[currentIndex].titleEn ? projects[currentIndex].titleEn : projects[currentIndex].title}
                                 </h3>
                                 <p className="text-gray-400 mb-6 line-clamp-3">
-                                    {projects[currentIndex].shortDescription}
+                                    {language === 'en' && projects[currentIndex].shortDescriptionEn ? projects[currentIndex].shortDescriptionEn : projects[currentIndex].shortDescription}
                                 </p>
 
                                 <div className="flex flex-wrap gap-2">

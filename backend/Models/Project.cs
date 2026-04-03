@@ -12,6 +12,12 @@ public class Project
     // Descrição completa para a página de Detalhes
     public string FullDescription { get; set; } = string.Empty;
     
+    // --- English Translations ---
+    public string? TitleEn { get; set; }
+    public string? CategoryEn { get; set; }
+    public string? ShortDescriptionEn { get; set; }
+    public string? FullDescriptionEn { get; set; }
+    
     // Lista de tecnologias (O EF Core converte isso nativamente para JSON no banco)
     public List<string> Techs { get; set; } = new();
     

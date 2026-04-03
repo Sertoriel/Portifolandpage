@@ -70,6 +70,10 @@ public class ProjectsController : ControllerBase
             Category = dto.Category,
             ShortDescription = dto.ShortDescription,
             FullDescription = dto.FullDescription,
+            TitleEn = dto.TitleEn,
+            CategoryEn = dto.CategoryEn,
+            ShortDescriptionEn = dto.ShortDescriptionEn,
+            FullDescriptionEn = dto.FullDescriptionEn,
             ThumbnailUrl = finalUrl,
             GithubLink = dto.GithubLink,
             DownloadLink = dto.DownloadLink,
@@ -116,6 +120,13 @@ public class ProjectsController : ControllerBase
         existingProject.Category = dto.Category;
         existingProject.ShortDescription = dto.ShortDescription;
         existingProject.FullDescription = dto.FullDescription;
+
+        // Alterações de Traduções em Inglês
+        existingProject.TitleEn = dto.TitleEn;
+        existingProject.CategoryEn = dto.CategoryEn;
+        existingProject.ShortDescriptionEn = dto.ShortDescriptionEn;
+        existingProject.FullDescriptionEn = dto.FullDescriptionEn;
+
         existingProject.GithubLink = dto.GithubLink;
         existingProject.DownloadLink = dto.DownloadLink;
 

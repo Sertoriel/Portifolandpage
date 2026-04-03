@@ -4,12 +4,14 @@ import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Navbar from '../components/Navbar'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function BlogPostView() {
     const { slug } = useParams()
     const [post, setPost] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [errorMsg, setErrorMsg] = useState("")
+    const { t, language } = useLanguage()
 
     useEffect(() => {
         // Se o usuário estiver logado, ele consegue ler os próprios rascunhos.
@@ -32,13 +34,13 @@ export default function BlogPostView() {
             })
     }, [slug])
 
-    if (isLoading) return <div className="min-h-screen bg-transparent text-gray-500 flex justify-center items-center">Buscando do repositório...</div>
+    if (isLoading) return <div className="min-h-screen bg-transparent text-gray-500 flex justify-center items-center">{t('blog_post_loading')}</div>
 
     if (errorMsg || !post) return (
         <div className="min-h-screen bg-transparent flex flex-col justify-center items-center gap-4">
             <h1 className="text-2xl font-bold text-red-500">404</h1>
-            <p className="text-gray-400">{errorMsg}</p>
-            <Link to="/blog" className="text-brand-400 hover:text-brand-300 transition-colors">Voltar aos Arquivos</Link>
+            <p className="text-gray-400">{errorMsg || t('blog_post_error')}</p>
+            <Link to="/blog" className="text-brand-400 hover:text-brand-300 transition-colors">{t('blog_post_back')}</Link>
         </div>
     )
 
@@ -64,11 +66,11 @@ export default function BlogPostView() {
                             </div>
                         )}
                         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                            {post.title}
+                            {language === 'en' && post.titleEn ? post.titleEn : post.title}
                         </h1>
                         <div className="flex items-center justify-center md:justify-start gap-3 text-brand-400 font-mono text-sm opacity-80">
                             <time>
-                                {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
+                                {new Date(post.publishedAt).toLocaleDateString(language === 'en' ? 'en-US' : 'pt-BR', {
                                     day: '2-digit', month: 'long', year: 'numeric'
                                 })}
                             </time>
@@ -80,7 +82,7 @@ export default function BlogPostView() {
                     {/* A tipografia Typography no seu esplendor máximo: */}
                     <div className="prose prose-invert prose-brand max-w-none prose-p:leading-loose prose-pre:bg-[#07080b] prose-pre:border prose-pre:border-brand-800 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline prose-md">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {post.content}
+                            {language === 'en' && post.contentEn ? post.contentEn : post.content}
                         </ReactMarkdown>
                     </div>
                 </motion.article>

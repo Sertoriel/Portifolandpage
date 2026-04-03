@@ -15,6 +15,7 @@ export default function AdminDashboard() {
 
     const [formData, setFormData] = useState({
         title: '', category: '', shortDescription: '', fullDescription: '',
+        titleEn: '', categoryEn: '', shortDescriptionEn: '', fullDescriptionEn: '',
         techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '', image: null
     })
 
@@ -61,6 +62,12 @@ export default function AdminDashboard() {
         payload.append('Category', formData.category)
         payload.append('ShortDescription', formData.shortDescription)
         payload.append('FullDescription', formData.fullDescription)
+        // Textos em inglês
+        if (formData.titleEn) payload.append('TitleEn', formData.titleEn)
+        if (formData.categoryEn) payload.append('CategoryEn', formData.categoryEn)
+        if (formData.shortDescriptionEn) payload.append('ShortDescriptionEn', formData.shortDescriptionEn)
+        if (formData.fullDescriptionEn) payload.append('FullDescriptionEn', formData.fullDescriptionEn)
+
         payload.append('Techs', formData.techs) // Envia a string crua para o .NET fazer o split
 
         if (formData.githubLink) payload.append('GithubLink', formData.githubLink)
@@ -104,6 +111,44 @@ export default function AdminDashboard() {
         }
     }
 
+    // Tradutor Mágico
+    const handleAutoTranslate = async () => {
+        const token = localStorage.getItem('portfolio_token')
+        setStatus({ loading: true, message: 'Traduzindo com a IA (Google Translate)... aguarde!', type: 'info' })
+        try {
+            const translateField = async (text) => {
+                if (!text) return ''
+                const res = await fetch('http://localhost:5000/api/Translation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ text })
+                })
+                if (res.ok) {
+                    const data = await res.json()
+                    return data.translatedText
+                }
+                return text // fallback para o original caso a api falhe localmente
+            }
+
+            const transTitle = await translateField(formData.title)
+            const transCat = await translateField(formData.category)
+            const transShort = await translateField(formData.shortDescription)
+            const transFull = await translateField(formData.fullDescription)
+
+            setFormData((prev) => ({
+                ...prev,
+                titleEn: transTitle,
+                categoryEn: transCat,
+                shortDescriptionEn: transShort,
+                fullDescriptionEn: transFull
+            }))
+            setStatus({ loading: false, message: 'Sucesso! Campos preenchidos automaticamente.', type: 'success' })
+        } catch (error) {
+            console.error(error)
+            setStatus({ loading: false, message: 'Erro na tradução.', type: 'error' })
+        }
+    }
+
     // 3. Função de Deletar
     const handleDelete = async (id, title) => {
         const confirmDelete = window.confirm(`Tem certeza que deseja apagar o projeto "${title}"?`)
@@ -135,6 +180,10 @@ export default function AdminDashboard() {
             category: project.category,
             shortDescription: project.shortDescription,
             fullDescription: project.fullDescription,
+            titleEn: project.titleEn || '',
+            categoryEn: project.categoryEn || '',
+            shortDescriptionEn: project.shortDescriptionEn || '',
+            fullDescriptionEn: project.fullDescriptionEn || '',
             techs: project.techs.join(', '), // Transforma o Array de volta em String para o input
             thumbnailUrl: project.thumbnailUrl || '',
             githubLink: project.githubLink || '',
@@ -148,7 +197,7 @@ export default function AdminDashboard() {
 
     const cancelEdit = () => {
         setEditingId(null)
-        setFormData({ title: '', category: '', shortDescription: '', fullDescription: '', techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '', image: null })
+        setFormData({ title: '', category: '', shortDescription: '', fullDescription: '', titleEn: '', categoryEn: '', shortDescriptionEn: '', fullDescriptionEn: '', techs: '', thumbnailUrl: '', githubLink: '', downloadLink: '', image: null })
         setStatus({ loading: false, message: '', type: '' })
     }
 
@@ -209,33 +258,66 @@ export default function AdminDashboard() {
                             Modo de Edição Ativo
                         </div>
                     )}
+                    
+                    {/* Linha Divisória de Tradução */}
+                    <div className="flex flex-col md:flex-row items-center justify-between bg-blue-900/20 border border-blue-500/30 p-4 rounded-xl mb-2 gap-4">
+                        <div className="text-sm text-blue-200">
+                            <strong>Tradução Automática:</strong> Preencha o lado em PT-BR e clique no raio.
+                        </div>
+                        <button 
+                            type="button" 
+                            onClick={handleAutoTranslate} 
+                            disabled={status.loading || !formData.title} 
+                            className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center transition-all disabled:opacity-50 cursor-pointer w-full md:w-auto"
+                        >
+                            ⚡ Auto-Traduzir (EN)
+                        </button>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
-                            <label className="text-sm text-gray-400">Título do Projeto *</label>
+                            <label className="text-sm text-brand-300 font-bold">Título do Projeto (PT-BR) *</label>
                             <input required type="text" name="title" value={formData.title} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label className="text-sm text-gray-400">Categoria *</label>
+                            <label className="text-sm text-blue-300 font-bold">Título (EN) *</label>
+                            <input required type="text" name="titleEn" value={formData.titleEn} onChange={handleChange} className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-brand-300 font-bold">Categoria (PT-BR) *</label>
                             <input required type="text" name="category" value={formData.category} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
                         </div>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-400">Descrição Curta *</label>
-                        <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
-                    </div>
-
-                        <div className="flex flex-col gap-2 md:col-span-2">
-                            <label className="text-sm font-bold text-gray-300 flex items-center justify-between">
-                                Descrição Completa do Projeto
-                                <span className="text-xs font-normal text-brand-400 bg-brand-900/30 px-2 py-1 rounded-full flex items-center gap-1">
-                                    <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"/></svg>
-                                    Suporta Markdown (Estilo Obsidian)
-                                </span>
-                            </label>
-                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto Incrível&#10;&#10;Aqui você pode usar **negrito**, *itálico*, links e tabelas!" className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-blue-300 font-bold">Categoria (EN) *</label>
+                            <input required type="text" name="categoryEn" value={formData.categoryEn} onChange={handleChange} className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
                         </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-brand-300 font-bold">Descrição Curta (PT-BR) *</label>
+                            <input required type="text" name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-blue-300 font-bold">Descrição Curta (EN) *</label>
+                            <input required type="text" name="shortDescriptionEn" value={formData.shortDescriptionEn} onChange={handleChange} className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500" />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm font-bold text-brand-300 flex items-center justify-between">
+                                Descrição Completa (PT-BR)
+                            </label>
+                            <textarea required name="fullDescription" value={formData.fullDescription} onChange={handleChange} rows="8" placeholder="# Meu Projeto..." className="bg-brand-800 border border-brand-700 rounded-lg p-3 text-white focus:outline-none focus:border-brand-500 font-mono text-sm leading-relaxed"></textarea>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm font-bold text-blue-300 flex items-center justify-between">
+                                Descrição Completa (EN)
+                            </label>
+                            <textarea required name="fullDescriptionEn" value={formData.fullDescriptionEn} onChange={handleChange} rows="8" placeholder="# English Markdown..." className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm leading-relaxed"></textarea>
+                        </div>
+                    </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm text-gray-400">Tecnologias (Vírgula)</label>

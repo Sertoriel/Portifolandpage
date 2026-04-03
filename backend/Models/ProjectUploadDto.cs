@@ -18,6 +18,13 @@ namespace Portfol.Api.Models
         
         [Required(ErrorMessage = "A descrição completa é obrigatória.")]
         public string FullDescription { get; set; } = string.Empty;
+
+        // English Translations
+        public string? TitleEn { get; set; }
+        public string? CategoryEn { get; set; }
+        public string? ShortDescriptionEn { get; set; }
+        public string? FullDescriptionEn { get; set; }
+        
         
         // Techs agora chegam como string na Request Multipart DTO, em vez de um Array puro de JSON
         public string Techs { get; set; } = string.Empty;
