@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ContactForm = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle, sending, success, error
   const [errorMessage, setErrorMessage] = useState('');
@@ -52,13 +54,13 @@ const ContactForm = () => {
         <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-brand-300/20 dark:bg-brand-400/30 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         <div className="relative z-10">
-          <h2 className="text-3xl font-bold text-brand-900 dark:text-white mb-2 text-center">Entre em Contato</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 text-center text-sm md:text-base">Tem um projeto em mente? Vamos conversar e transformá-lo em realidade.</p>
+          <h2 className="text-3xl font-bold text-brand-900 dark:text-white mb-2 text-center">{t('contact_title')}</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-8 text-center text-sm md:text-base">{t('contact_desc')}</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label flex htmlFor="name" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">Nome</label>
+                <label flex htmlFor="name" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">{t('contact_name')}</label>
                 <input
                   type="text"
                   id="name"
@@ -67,12 +69,12 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
-                  placeholder="Seu nome"
+                  placeholder={t('contact_name_ph')}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">E-mail</label>
+                <label htmlFor="email" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">{t('contact_email')}</label>
                 <input
                   type="email"
                   id="email"
@@ -81,13 +83,13 @@ const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 backdrop-blur-sm shadow-sm"
-                  placeholder="seu@email.com"
+                  placeholder={t('contact_email_ph')}
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">Mensagem</label>
+              <label htmlFor="message" className="block text-sm font-medium text-brand-700 dark:text-gray-300 mb-1">{t('contact_msg')}</label>
               <textarea
                 id="message"
                 name="message"
@@ -96,7 +98,7 @@ const ContactForm = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-black/30 border border-gray-300/50 dark:border-brand-700/50 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-brand-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400/80 resize-none backdrop-blur-sm shadow-sm"
-                placeholder="Como posso te ajudar?"
+                placeholder={t('contact_msg_ph')}
               />
             </div>
 
@@ -113,11 +115,11 @@ const ContactForm = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span>Disparando E-mail...</span>
+                  <span>{t('contact_btn_sending')}</span>
                 </div>
               ) : (
                 <span className="flex items-center gap-2">
-                  Enviar Mensagem
+                  {t('contact_btn_send')}
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
               )}
@@ -129,7 +131,7 @@ const ContactForm = () => {
                 animate={{ opacity: 1, y: 0 }} 
                 className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-700 dark:text-green-400 text-center font-medium shadow-sm backdrop-blur-md"
               >
-                Mensagem enviada com sucesso! Entrarei em contato em breve.
+                {t('contact_success')}
               </motion.div>
             )}
 

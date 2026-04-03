@@ -8,9 +8,11 @@ import BlogList from './Pages/BlogList'
 import BlogPostView from './Pages/BlogPostView'
 import LayoutBackground from './components/LayoutBackground'
 
+import { LanguageProvider } from './contexts/LanguageContext'
+
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <LayoutBackground />
       <BrowserRouter>
         <Routes>
@@ -31,7 +33,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPostView />} />
       </Routes>
     </BrowserRouter>
-    </>
+    </LanguageProvider>
   )
 }
 

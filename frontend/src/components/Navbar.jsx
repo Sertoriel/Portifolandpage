@@ -2,8 +2,11 @@ import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router' // Correção sutil no import do react-router-dom
 import { useNavigate } from 'react-router' // Adicionado para navegar para o admin
 import logo from '../assets/ST.png'
+import { useLanguage } from '../contexts/LanguageContext'
+import TranslateButton from './TranslateButton'
 
 export default function Navbar() {
+    const { t } = useLanguage()
     const location = useLocation()
     const navigate = useNavigate()
     const isHome = location.pathname === '/'
@@ -37,22 +40,24 @@ export default function Navbar() {
                     <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                         {isHome ? (
                             <>
-                                <button onClick={() => scrollToSection('hero')} className="hover:text-brand-400 transition-colors cursor-pointer">Início</button>
-                                <button onClick={() => scrollToSection('projetos')} className="hover:text-brand-400 transition-colors cursor-pointer">Projetos</button>
-                                <button onClick={() => scrollToSection('contato')} className="hover:text-brand-400 transition-colors cursor-pointer">Contato</button>
+                                <button onClick={() => scrollToSection('hero')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_home')}</button>
+                                <button onClick={() => scrollToSection('projetos')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_projects')}</button>
+                                <button onClick={() => scrollToSection('contato')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_contact')}</button>
                             </>
                         ) : (
-                            <Link to="/" className="hover:text-brand-400 transition-colors cursor-pointer">Voltar para a Home</Link>
+                            <Link to="/" className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_back_home')}</Link>
                         )}
                     </div>
 
                     {/* O seu botão de destaque agora promove o Blog ao invés da tela Admin */}
                     <button
                         onClick={() => navigate('/blog')}
-                        className="px-5 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(79,134,95,0.4)] hover:shadow-[0_0_25px_rgba(37,106,94,0.6)] cursor-pointer"
+                        className="px-5 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(79,134,95,0.4)] hover:shadow-[0_0_25px_rgba(37,106,94,0.6)] cursor-pointer whitespace-nowrap"
                     >
-                        Ver Artigos 📝
+                        {t('nav_articles_btn')}
                     </button>
+
+                    <TranslateButton />
                 </div>
 
             </div>

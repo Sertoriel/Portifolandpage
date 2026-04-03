@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router'
 import Lottie from 'lottie-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 import Error404 from '../assets/Error404.json'
 
@@ -12,6 +13,7 @@ export default function FeatureSection() {
     const [errorMsg, setErrorMsg] = useState("")
 
     const navigate = useNavigate()
+    const { t } = useLanguage()
 
     useEffect(() => {
         fetch('http://localhost:5000/api/Projects')
@@ -42,15 +44,14 @@ export default function FeatureSection() {
 
     // --- TRAVAS DE SEGURANÇA ---
     if (isLoading) {
-        return <div className="w-full min-h-screen flex items-center justify-center bg-transparent text-white z-20 relative">Carregando projetos do servidor...</div>
+        return <div className="w-full min-h-screen flex items-center justify-center bg-transparent text-white z-20 relative">{t('feat_loading')}</div>
     }
 
     if (errorMsg !== "") {
         return (
             <div className="w-full min-h-screen flex flex-col items-center justify-center bg-transparent z-20 relative text-white">
-                <h2 className="text-3xl font-bold text-red-500 mb-4">Erro de Conexão</h2>
+                <h2 className="text-3xl font-bold text-red-500 mb-4">{t('feat_error')}</h2>
                 <p className="text-gray-400">{errorMsg}</p>
-                <p className="text-sm text-gray-500 mt-2">Dica: O servidor .NET está rodando na porta 5000?</p>
             </div>
         )
     }
@@ -58,8 +59,8 @@ export default function FeatureSection() {
     if (!projects || projects.length === 0) {
         return (
             <div className="w-full min-h-screen flex flex-col items-center justify-center bg-transparent z-20 relative text-white">
-                <h2 className="text-3xl text-white mb-4">Nenhum projeto encontrado.</h2>
-                <p className="text-gray-400">O banco de dados do .NET está vazio.</p>
+                <h2 className="text-3xl text-white mb-4">{t('feat_empty')}</h2>
+                <p className="text-gray-400">{t('feat_empty_desc')}</p>
             </div>
         )
     }
@@ -74,10 +75,10 @@ export default function FeatureSection() {
                 className="max-w-3xl text-center mb-12"
             >
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    Meus <span className="text-brand-500">Projetos</span>
+                    {t('feat_title')} <span className="text-brand-500">{t('feat_title_span')}</span>
                 </h2>
                 <p className="text-lg text-gray-400">
-                    Navegue pelo meu repositório de desenvolvimento Back-end e Jogos.
+                    {t('feat_desc')}
                 </p>
             </motion.div>
 
@@ -147,7 +148,7 @@ export default function FeatureSection() {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                     <span className="text-white font-bold text-sm flex items-center gap-2">
-                                        Explorar <span className="text-brand-400">→</span>
+                                        {t('feat_explore')} <span className="text-brand-400">→</span>
                                     </span>
                                 </div>
                             </motion.div>
