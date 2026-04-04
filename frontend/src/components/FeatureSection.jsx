@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router'
 import Lottie from 'lottie-react'
 import { useLanguage } from '../contexts/LanguageContext'
+import TypewriterText from './TypewriterText'
 
 import Error404 from '../assets/Error404.json'
 
@@ -75,7 +76,8 @@ export default function FeatureSection() {
                 className="max-w-3xl text-center mb-12"
             >
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    {t('feat_title')} <span className="text-brand-500">{t('feat_title_span')}</span>
+                    <TypewriterText text={t('feat_title')} speed={15} delay={100} />{' '}
+                    <TypewriterText className="text-brand-500" text={t('feat_title_span')} speed={15} delay={400} />
                 </h2>
                 <p className="text-lg text-gray-400">
                     {t('feat_desc')}
@@ -107,7 +109,10 @@ export default function FeatureSection() {
                                     {language === 'en' && projects[currentIndex].categoryEn ? projects[currentIndex].categoryEn : projects[currentIndex].category}
                                 </span>
                                 <h3 className="text-3xl font-bold text-white mt-2 mb-4">
-                                    {language === 'en' && projects[currentIndex].titleEn ? projects[currentIndex].titleEn : projects[currentIndex].title}
+                                    <TypewriterText 
+                                        text={language === 'en' && projects[currentIndex].titleEn ? projects[currentIndex].titleEn : projects[currentIndex].title}
+                                        speed={20}
+                                    />
                                 </h3>
                                 <p className="text-gray-400 mb-6 line-clamp-3">
                                     {language === 'en' && projects[currentIndex].shortDescriptionEn ? projects[currentIndex].shortDescriptionEn : projects[currentIndex].shortDescription}

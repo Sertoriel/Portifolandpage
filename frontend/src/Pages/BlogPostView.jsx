@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Navbar from '../components/Navbar'
 import { useLanguage } from '../contexts/LanguageContext'
+import TypewriterText from '../components/TypewriterText'
 
 export default function BlogPostView() {
     const { slug } = useParams()
@@ -66,7 +67,7 @@ export default function BlogPostView() {
                             </div>
                         )}
                         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                            {language === 'en' && post.titleEn ? post.titleEn : post.title}
+                            <TypewriterText text={language === 'en' && post.titleEn ? post.titleEn : post.title} speed={25} />
                         </h1>
                         <div className="flex items-center justify-center md:justify-start gap-3 text-brand-400 font-mono text-sm opacity-80">
                             <time>

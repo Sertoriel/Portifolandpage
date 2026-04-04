@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import { useLanguage } from '../contexts/LanguageContext'
+import TypewriterText from '../components/TypewriterText'
 
 export default function BlogList() {
     const [posts, setPosts] = useState([])
@@ -28,7 +29,9 @@ export default function BlogList() {
             
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-16">
                 <header className="mb-12 border-b border-brand-800 pb-6">
-                    <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">{t('blog_title')}</h1>
+                    <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+                        <TypewriterText text={t('blog_title')} speed={15} />
+                    </h1>
                     <p className="text-gray-400">{t('blog_desc')}</p>
                 </header>
 
@@ -62,7 +65,7 @@ export default function BlogList() {
                                             <span className="text-gray-500">{Math.max(1, Math.ceil(post.content.length / 800))} min {language === 'en' ? 'read' : 'de leitura'}</span>
                                         </div>
                                         <h2 className="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-brand-300 transition-colors leading-snug">
-                                            {language === 'en' && post.titleEn ? post.titleEn : post.title}
+                                            <TypewriterText text={language === 'en' && post.titleEn ? post.titleEn : post.title} speed={25} />
                                         </h2>
                                         <p className="text-gray-400 text-sm mt-2 leading-relaxed line-clamp-2">
                                             {language === 'en' && post.summaryEn ? post.summaryEn : post.summary}
