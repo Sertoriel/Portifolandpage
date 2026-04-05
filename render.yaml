@@ -1,0 +1,27 @@
+services:
+  # C# Web API Core (Docker)
+  - type: web
+    name: portfoland-web
+    env: docker
+    rootDir: backend
+    plan: free # Troque para 'starter' ou superior caso mude de plano
+    healthCheckPath: /
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: portfoland-db
+          property: connectionString
+      - key: AllowedOrigins__0
+        value: https://Sertoriel-site.vercel.app # Exemplo, você mudará pela URL real
+      - key: Jwt__Key
+        sync: false
+      - key: AdminLogin__Username
+        sync: false
+      - key: AdminLogin__Password
+        sync: false
+
+  # PostgreSQL DB (Managed by Render)
+  - type: psql
+    name: portfoland-db
+    plan: free # Troque para 'starter' ou superior caso mude de plano
+    postgresMajorVersion: "16"

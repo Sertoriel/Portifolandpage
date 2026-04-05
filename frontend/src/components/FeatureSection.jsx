@@ -17,7 +17,7 @@ export default function FeatureSection() {
     const { t, language } = useLanguage()
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/Projects')
+        fetch(`${import.meta.env.VITE_API_URL}/Projects`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Erro HTTP: ${response.status}`);

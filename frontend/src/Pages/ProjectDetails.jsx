@@ -17,7 +17,7 @@ export default function ProjectDetails() {
     const { t, language } = useLanguage()
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/Projects/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/Projects/${id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Projeto não encontrado");

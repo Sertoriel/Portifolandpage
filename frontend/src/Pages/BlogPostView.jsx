@@ -74,7 +74,7 @@ export default function BlogPostView() {
         const token = localStorage.getItem('portfolio_token') || ''
         const headers = token ? { 'Authorization': `Bearer ${token}` } : {}
 
-        fetch(`http://localhost:5000/api/Blog/${slug}`, { headers })
+        fetch(`${import.meta.env.VITE_API_URL}/Blog/${slug}`, { headers })
             .then(res => {
                 if (!res.ok) throw new Error("Publicação não encontrada.")
                 return res.json()

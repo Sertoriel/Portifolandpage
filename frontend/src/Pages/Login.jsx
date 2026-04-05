@@ -18,7 +18,7 @@ export default function Login() {
 
         try {
             // Chama a rota do nosso AuthController no .NET
-            const response = await fetch('http://localhost:5000/api/Auth/login', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/Auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(credentials)
