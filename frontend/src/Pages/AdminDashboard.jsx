@@ -34,7 +34,7 @@ export default function AdminDashboard() {
     // Função para buscar os projetos e atualizar a lista na tela
     const fetchProjects = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/Projects')
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/Projects`)
             if (res.ok) {
                 const data = await res.json()
                 setProjectsList(data)
@@ -83,8 +83,8 @@ export default function AdminDashboard() {
             const token = localStorage.getItem('portfolio_token')
 
             const url = editingId
-                ? `http://localhost:5000/api/Projects/${editingId}`
-                : 'http://localhost:5000/api/Projects'
+                ? `${import.meta.env.VITE_API_URL}/Projects/${editingId}`
+                : `${import.meta.env.VITE_API_URL}/Projects`
 
             const method = editingId ? 'PUT' : 'POST'
 
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
         try {
             const translateField = async (text) => {
                 if (!text) return ''
-                const res = await fetch('http://localhost:5000/api/Translation', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/Translation`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({ text })
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
 
         try {
             const token = localStorage.getItem('portfolio_token')
-            const response = await fetch(`http://localhost:5000/api/Projects/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/Projects/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             })

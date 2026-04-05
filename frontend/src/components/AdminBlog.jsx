@@ -17,7 +17,7 @@ export default function AdminBlog() {
     const fetchPosts = async () => {
         try {
             const token = localStorage.getItem('portfolio_token')
-            const res = await fetch('http://localhost:5000/api/Blog/admin', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/Blog/admin`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
             if (res.ok) {
@@ -41,8 +41,8 @@ export default function AdminBlog() {
         try {
             const token = localStorage.getItem('portfolio_token')
             const url = editingId 
-                ? `http://localhost:5000/api/Blog/${editingId}`
-                : 'http://localhost:5000/api/Blog'
+                ? `${import.meta.env.VITE_API_URL}/Blog/${editingId}`
+                : `${import.meta.env.VITE_API_URL}/Blog`
             const method = editingId ? 'PUT' : 'POST'
 
             // Ajustamos o payload para casar perfeitamente com BlogPost C#
@@ -86,7 +86,7 @@ export default function AdminBlog() {
         try {
             const translateField = async (text) => {
                 if (!text) return ''
-                const res = await fetch('http://localhost:5000/api/Translation', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/Translation`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({ text })
@@ -121,7 +121,7 @@ export default function AdminBlog() {
 
         try {
             const token = localStorage.getItem('portfolio_token')
-            const response = await fetch(`http://localhost:5000/api/Blog/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/Blog/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             })

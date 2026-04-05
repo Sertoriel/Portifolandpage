@@ -23,7 +23,7 @@ export default function BlogList() {
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/Blog')
+        fetch(`${import.meta.env.VITE_API_URL}/Blog`)
             .then(res => res.json())
             .then(data => {
                 setPosts(data)
