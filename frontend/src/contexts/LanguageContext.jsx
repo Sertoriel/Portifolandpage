@@ -53,7 +53,11 @@ const dictionary = {
     blog_back: "← Voltar para a Home",
     blog_post_loading: "Carregando postagem...",
     blog_post_error: "Postagem não encontrada.",
-    blog_post_back: "← Voltar ao Blog"
+    blog_post_back: "← Voltar ao Blog",
+    blog_on_this_page: "Nesta página",
+    blog_search_placeholder: "Pesquisar artigos...",
+    blog_toc_title: "Índice",
+    blog_toc_empty: "Este artigo não possui subdivisões."
   },
   en: {
     nav_home: "Home",
@@ -105,7 +109,11 @@ const dictionary = {
     blog_back: "← Back to Home",
     blog_post_loading: "Loading post...",
     blog_post_error: "Post not found.",
-    blog_post_back: "← Back to Blog"
+    blog_post_back: "← Back to Blog",
+    blog_on_this_page: "On this page",
+    blog_search_placeholder: "Search articles...",
+    blog_toc_title: "Table of Contents",
+    blog_toc_empty: "This article has no sub-sections."
   }
 };
 
