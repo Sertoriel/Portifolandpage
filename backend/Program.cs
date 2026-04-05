@@ -8,9 +8,19 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configura o Banco de Dados
+// Configura o Banco de Dados interceptando URLs da Nuvem (Render/Heroku)
+var connString = builder.Configuration.GetConnectionString("DefaultConnection") ?? builder.Configuration["ConnectionStrings:DefaultConnection"];
+
+if (!string.IsNullOrEmpty(connString) && connString.StartsWith("postgres://"))
+{
+    var uri = new Uri(connString);
+    var userInfo = uri.UserInfo.Split(':');
+    var dbName = uri.AbsolutePath.TrimStart('/');
+    connString = $"Host={uri.Host};Port={(uri.Port > 0 ? uri.Port : 5432)};Database={dbName};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;";
+}
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connString));
 
 // Libera o CORS dinamicamente
 builder.Services.AddCors(options =>
