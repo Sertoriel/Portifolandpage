@@ -75,4 +75,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+app.MapGet("/", () => "API Portifolio Sertori.Dev is running!");
+
 app.Run();
