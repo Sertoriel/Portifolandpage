@@ -10,10 +10,16 @@ public class AppDbContext : DbContext
     }
 
     // Isso diz ao EF Core para criar uma tabela chamada "Projects"
-    public DbSet<Project> Projects { get; set; }
+    public DbSet<Project> Projects { get; set; } = null!;
 
     // Tabela do Novo Blog
-    public DbSet<BlogPost> BlogPosts { get; set; }
+    public DbSet<BlogPost> BlogPosts { get; set; } = null!;
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
+        base.OnConfiguring(optionsBuilder);
+    }
 
     // Vamos inserir alguns dados falsos (Seed) para você já ter o que mostrar no Front
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +34,7 @@ public class AppDbContext : DbContext
                 Category = "Backend & Ferramentas",
                 ShortDescription = "Ferramenta para debug e análise de logs de chatbots.",
                 FullDescription = "Desenvolvido para otimizar o fluxo de monitoramento de dados em sistemas de mensageria...",
-                Techs = new List<string> { "Python", "PHP", "Laravel" },
+                Techs = ["Python", "PHP", "Laravel"],
                 ColorClass = "text-blue-400",
                 BgBorderClass = "border-blue-500/30"
             },
@@ -39,7 +45,7 @@ public class AppDbContext : DbContext
                 Category = "Game Development",
                 ShortDescription = "Plataforma de gamificação mobile imersiva.",
                 FullDescription = "Focada em engajamento e experiência do usuário em ambientes educacionais, utilizando mecânicas de jogos para retenção de conhecimento.",
-                Techs = new List<string> { "Unity", "C#", "Mobile UI" },
+                Techs = ["Unity", "C#", "Mobile UI"],
                 ColorClass = "text-purple-400",
                 BgBorderClass = "border-purple-500/30"
             }

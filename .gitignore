@@ -3,6 +3,7 @@
 # =========================
 frontend/node_modules/
 frontend/dist/
+frontend/build/
 frontend/.env
 frontend/.env.*
 npm-debug.log*
@@ -13,11 +14,24 @@ npm-debug.log*
 backend/bin/
 backend/obj/
 backend/appsettings.Development.json
+backend/appsettings.*.json
 
-# Ignorar o banco de dados local (Segurança!)
+# Ignorar o banco de dados legados (Segurança!)
 backend/*.db
 backend/*.db-shm
 backend/*.db-wal
+
+# =========================
+# SEGURANÇA E AMBIENTE (Crucial)
+# =========================
+.env
+.env.*
+.gemini/
+.vscode/
+.idea/
+*.suo
+*.user
+secrets.json
 
 # =========================
 # SISTEMA OPERACIONAL

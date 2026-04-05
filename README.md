@@ -1,5 +1,5 @@
 <h1 align="center">
-  🚀 Sertori.dev | Full-Stack Portfolio
+  🚀 Sertori.dev | Full-Stack Portfólio & Blog Acadêmico
 </h1>
 
 <p align="center">
@@ -10,115 +10,93 @@
   <br/>
   <img src="https://img.shields.io/badge/.NET_10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10" />
   <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#" />
-  <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT" />
 </p>
 
-> Plataforma interativa e responsiva desenvolvida para exibir projetos de Engenharia de Software e Game Development, com uma arquitetura dividida entre uma interface visual imersiva e uma API de gerenciamento segura.
-
-## ✨ Funcionalidades
-
-### 🌐 Área Pública (Frontend)
-- **Hero Section Imersiva:** Apresentação dinâmica com animações complexas via `Framer Motion` e `Lottie`.
-- **Carrossel de Projetos:** Exibição fluida dos projetos diretamente do banco de dados, com navegação suave e placeholders animados.
-- **Páginas de Detalhes:** Rotas dinâmicas (`/projeto/:id`) carregando documentação, links do GitHub e downloads executáveis.
-- **Design Glassmorphism:** Interface Dark Mode com efeitos de *glow* e desfoque de fundo (Tailwind CSS).
-
-### 🔒 Área Administrativa (Backend & API)
-- **Autenticação JWT:** Rota de Login protegida, garantindo que apenas administradores acessem o painel.
-- **CRUD Completo:** Criação, Leitura, Atualização e Exclusão de projetos com persistência em banco de dados.
-- **Painel Admin:** Interface no React dedicada ao gerenciamento do portfólio, exigindo *Bearer Token* em requisições seguras.
-- **Documentação de API:** Mapeamento nativo OpenAPI com interface interativa *Scalar*.
+> Plataforma imersiva, responsiva e internacionalizada desenvolvida para exibir projetos robustos de Engenharia de Software. Construída em arquitetura Clean N-Tier com uma interface estética *Hacker/IDE* (Glassmorphism e tipografia JetBrains Mono) conectada a uma API restrita em .NET 10 hospedada sob contêineres Docker.
 
 ---
 
-## 🏗️ Arquitetura do Projeto
+## ✨ Funcionalidades em Destaque
 
-O projeto segue a arquitetura **N-Tier** (Camadas), separando estritamente a interface de usuário da lógica de negócios e acesso a dados:
-- **`/frontend`**: Aplicação SPA em React (Vite). Consome a API RESTful.
-- **`/backend`**: API em .NET 10 rodando com Entity Framework Core. Recebe requisições, valida tokens JWT e interage com o SQLite.
+### 🌐 Automações e UX Dinâmica (Frontend)
+- **i18n Nativo:** Todo o painel, portfólios e artigos se traduzem automaticamente de Português (PT-BR) para Inglês (EN-US) sob demanda do Context API.
+- **Hero Section "Ghostty Terminal":** Apresentação simulando ambiente Bash de terminal interativo com efeitos `Typewriter` e injeção de ASCII Arts em tempo real.
+- **Blog System:** Renderizador de arquivos Markdown focado e orgânico para artigos.
+- **Navegação Smart Sidebar:** Sidebars "On This Page" com busca instantânea, agrupamento automatizado por data e extração de *Table of Contents* (Índice de Títulos H1-H3) injetandos via `rehype/ReactMarkdown`.
+- **Efeitos Premium:** Backgrounds de Blur-Glass, Botões baseados em JSON dinâmicos (Lottie Animation) e transições entre rotas via `Framer Motion`.
 
----
-
-## 🛠️ Tecnologias Utilizadas
-
-**Frontend:**
-- React (Hooks, React Router)
-- Vite (Build Tool)
-- Tailwind CSS (Estilização)
-- Framer Motion & Lottie React (Animações)
-
-**Backend:**
-- C# & .NET 10
-- Entity Framework Core (ORM)
-- SQLite (Banco de Dados Leve)
-- Autenticação JWT (JSON Web Tokens)
-- OpenAPI & Scalar (Documentação)
+### 🔒 Dados e Infraestrutura (Backend)
+- **PostgreSQL em Docker:** Alta integridade transacional escalonável operando sob persistência em contêineres nativos, com suporte a Mapeamento Geográfico via Npgsql.
+- **User Secrets & Segurança Rigorosa:** As configurações estocam zero credenciais no código-fonte, barrando vazamentos críticos na web.
+- **Painel Administrativo:** CRUD fechado com validação JWT. Cria, edita e versiona projetos e artigos entre "Rascunhos" e "Publicados" sem esforço.
+- **Documentação de API:** Mapeamento visual em tempo real construído em **Scalar API**.
 
 ---
 
-## 🚀 Como rodar o projeto localmente
+## 📚 Documentação Aprofundada
+Desenvolvemos uma coletânea técnica rica de arquivos Markdown nas dependências da pasta `/docs`. Se quiser entender a matemática dos recursos do projeto a fundo:
+- [📖 1. Visão Geral e Estrutura](./docs/1-visao-geral.md)
+- [🎨 2. Arquitetura Frontend & UI/UX](./docs/2-arquitetura-frontend.md)
+- [⚙️ 3. Arquitetura Backend & Banco de Dados](./docs/3-arquitetura-backend-db.md)
+
+---
+
+## 🚀 Como baixar e rodar localmente (Sem vazamentos)
 
 ### Pré-requisitos
-- [Node.js](https://nodejs.org/) (Para o Frontend)
-- [.NET SDK 10.0+](https://dotnet.microsoft.com/) (Para a API)
+- [Node.js (18+)](https://nodejs.org/)
+- [.NET SDK 10](https://dotnet.microsoft.com/)
+- [Docker Desktop](https://www.docker.com/) rodando no sistema.
 
-### 1. Configurando a API (.NET)
-
-## Abra um terminal e navegue até a pasta do backend:
+### 1. Preparando Banco de Dados e API (.NET)
+Abra um terminal na pasta responsável pela base lógica:
 ```bash
 cd backend
 ```
 
-## Configure as variáveis de segurança locais (User Secrets) para o JWT e Login:
-
-```Bash
+**Criar e isolar as chaves de segurança localmente (Dotnet User Secrets):**
+*Nenhuma chave inserida aqui jamais subirá para o GitHub.*
+```bash
 dotnet user-secrets init
-dotnet user-secrets set "Jwt:Key" "SuaChaveSuperSecretaMuitoLongaAqui123!@#"
-dotnet user-secrets set "AdminLogin:Username" "seu_usuario"
-dotnet user-secrets set "AdminLogin:Password" "sua_senha"
+dotnet user-secrets set "Jwt:Key" "SuaChaveUltraSecretaDePeloMenos25Caracteres!!"
+dotnet user-secrets set "AdminLogin:Username" "nome_usuario_sua_escolha"
+dotnet user-secrets set "AdminLogin:Password" "senha_forte_aqui"
 ```
 
-## Gere o banco de dados e as tabelas:
+**Subindo a Infraestrutura (Docker) e gerando Tabelas:**
+```bash
+# Baixa e engatilha o motor do PostgreSQL (porta 5432)
+docker compose up -d
 
-```Bash
+# Aplica as regras de negócios (C#) e gera os Schemas do Banco
 dotnet ef database update
-Inicie o servidor (geralmente rodará em http://localhost:5000):
-```
-```Bash
+
+# Inicializa as rotas da API em http://localhost:5000/
 dotnet watch
-(Acesse http://localhost:5000/scalar/v1 para ver a documentação da API).
 ```
+*(As chaves do projeto de endpoints e documentações paramétricas aparecerão acessando `http://localhost:5000/scalar/v1` no seu browser).*
 
-### 2. Configurando o Frontend (React)
-
-## Abra um novo terminal e navegue até a pasta do frontend:
-
-```Bash
+### 2. Preparando a Interface do Usuário (React)
+Abra uma janela de terminal paralela na pasta visual:
+```bash
 cd frontend
 ```
 
-## Instale as dependências:
-
-```Bash
+**Baixando dependências e Inicilizando o Vite:**
+```bash
 npm install
-Inicie o servidor de desenvolvimento:
-```
-
-```Bash
 npm run dev
-(Acesse http://localhost:5173 no seu navegador).
 ```
+O frontend reagirá automaticamente e despertará sua imersão em `http://localhost:5173`. Aproveite o porte premium e modifique à vontade!
 
-👤 Autor
-João Arthur Software Engineer & Game Developer
-
-GitHub: https://github.com/Sertoriel
-
-LinkedIn: www.linkedin.com/in/joao-arthur-duarte
-
-Contato: jotaduarfar@gmail.com
+---
 
 <p align="center">
-Desenvolvido com ☕ e muito código.
+👤 <b>Autor: João Arthur (Software Engineer & Game Developer)</b><br/>
+<a href="https://github.com/Sertoriel">GitHub</a> • <a href="www.linkedin.com/in/joao-arthur-duarte">LinkedIn</a> • ✉️ jotaduarfar@gmail.com
+<br/><br/>
+<i>Construído sob o rigor de um hacker.</i> ☕
 </p>

@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configura o Banco de Dados
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Libera o CORS para o Vite
 builder.Services.AddCors(options =>
