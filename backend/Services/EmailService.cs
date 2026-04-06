@@ -33,7 +33,7 @@ namespace Portfol.Api.Services
 
                 if (!int.TryParse(smtpPortString, out int smtpPort))
                 {
-                    smtpPort = 465;
+                    smtpPort = 587; // Porta padrão de fallback
                 }
 
                 var emailMessage = new MimeMessage();
@@ -48,15 +48,23 @@ namespace Portfol.Api.Services
                 };
 
                 using var client = new SmtpClient();
-                client.Timeout = 30000; // Timeout de 30 segundos
-                await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
+
+                // Aumentado para 30 segundos (30000ms) para contornar a lentidão do Render
+                client.Timeout = 30000;
+
+                // Configuração dinâmica de segurança: SSL para porta 465, StartTls para porta 587
+                var options = smtpPort == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
+
+                await client.ConnectAsync(smtpHost, smtpPort, options);
                 await client.AuthenticateAsync(smtpUser, smtpPass);
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
+
+                _logger.LogInformation("E-mail enviado com sucesso.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro interno durante o envio de e-mail.");
+                _logger.LogError(ex, "Erro ao enviar e-mail via formulário de contato.");
                 throw;
             }
         }
