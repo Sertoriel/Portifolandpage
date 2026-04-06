@@ -33,14 +33,14 @@ namespace Portfol.Api.Services
 
                 if (!int.TryParse(smtpPortString, out int smtpPort))
                 {
-                    smtpPort = 587;
+                    smtpPort = 465;
                 }
 
                 var emailMessage = new MimeMessage();
                 emailMessage.From.Add(new MailboxAddress("Formulário de Contato", smtpUser));
-                emailMessage.To.Add(new MailboxAddress("Admin", smtpUser)); 
+                emailMessage.To.Add(new MailboxAddress("Admin", smtpUser));
                 emailMessage.ReplyTo.Add(new MailboxAddress(fromName, fromEmail));
-                
+
                 emailMessage.Subject = $"Novo Contato de: {fromName}";
                 emailMessage.Body = new TextPart(TextFormat.Html)
                 {
@@ -48,7 +48,7 @@ namespace Portfol.Api.Services
                 };
 
                 using var client = new SmtpClient();
-                client.Timeout = 10000; // Timeout de 10 segundos
+                client.Timeout = 30000; // Timeout de 30 segundos
                 await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
                 await client.AuthenticateAsync(smtpUser, smtpPass);
                 await client.SendAsync(emailMessage);
