@@ -1,7 +1,6 @@
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using MimeKit;
-using MimeKit.Text;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace Portfol.Api.Services
 {
@@ -9,58 +8,54 @@ namespace Portfol.Api.Services
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<EmailService> _logger;
+        private readonly HttpClient _httpClient; // Usando HttpClient em vez de SmtpClient
 
-        public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
+        public EmailService(IConfiguration configuration, ILogger<EmailService> logger, HttpClient httpClient)
         {
             _configuration = configuration;
             _logger = logger;
+            _httpClient = httpClient;
         }
 
         public async Task SendEmailAsync(string fromName, string fromEmail, string message)
         {
             try
             {
-                var smtpHost = _configuration["SmtpHost"];
-                var smtpPortString = _configuration["SmtpPort"];
-                var smtpUser = _configuration["SmtpUser"];
-                var smtpPass = _configuration["SmtpPass"];
+                var apiKey = _configuration["ResendApiKey"];
+                // Fallback inteligente para o seu e-mail caso a variável não esteja setada
+                var toEmail = _configuration["ContactEmail"] ?? "jotaduarfar@gmail.com";
 
-                if (string.IsNullOrEmpty(smtpHost) || string.IsNullOrEmpty(smtpPortString) ||
-                    string.IsNullOrEmpty(smtpUser) || string.IsNullOrEmpty(smtpPass))
+                if (string.IsNullOrEmpty(apiKey))
                 {
-                    throw new InvalidOperationException("Configurações SMTP ausentes no ambiente.");
+                    throw new InvalidOperationException("A chave da API (ResendApiKey) está ausente no ambiente.");
                 }
 
-                if (!int.TryParse(smtpPortString, out int smtpPort))
+                // Payload no formato exigido pela API do Resend
+                var payload = new
                 {
-                    smtpPort = 587; // Porta padrão de fallback
-                }
-
-                var emailMessage = new MimeMessage();
-                emailMessage.From.Add(new MailboxAddress("Formulário de Contato", smtpUser));
-                emailMessage.To.Add(new MailboxAddress("Admin", smtpUser));
-                emailMessage.ReplyTo.Add(new MailboxAddress(fromName, fromEmail));
-
-                emailMessage.Subject = $"Novo Contato de: {fromName}";
-                emailMessage.Body = new TextPart(TextFormat.Html)
-                {
-                    Text = $"<h3>Nova Mensagem Recebida via Site</h3><p><strong>Nome:</strong> {fromName}</p><p><strong>E-mail:</strong> {fromEmail}</p><hr/><p>{message}</p>"
+                    // O Resend exige que o envio seja feito pelo domínio de teste deles até você adicionar um domínio próprio
+                    from = "Portfólio Contato <onboarding@resend.dev>",
+                    to = new[] { toEmail },
+                    reply_to = fromEmail,
+                    subject = $"Novo Contato de: {fromName}",
+                    html = $"<h3>Nova Mensagem Recebida via Site</h3><p><strong>Nome:</strong> {fromName}</p><p><strong>E-mail:</strong> {fromEmail}</p><hr/><p>{message}</p>"
                 };
 
-                using var client = new SmtpClient();
+                var jsonContent = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
 
-                // Aumentado para 30 segundos (30000ms) para contornar a lentidão do Render
-                client.Timeout = 30000;
+                // Adicionando o Token de autenticação
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-                // Configuração dinâmica de segurança: SSL para porta 465, StartTls para porta 587
-                var options = smtpPort == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
+                // Disparo pela porta HTTPS (443) - Imune a bloqueios de firewall do Render
+                var response = await _httpClient.PostAsync("https://api.resend.com/emails", jsonContent);
 
-                await client.ConnectAsync(smtpHost, smtpPort, options);
-                await client.AuthenticateAsync(smtpUser, smtpPass);
-                await client.SendAsync(emailMessage);
-                await client.DisconnectAsync(true);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Falha da API Resend ({response.StatusCode}): {errorContent}");
+                }
 
-                _logger.LogInformation("E-mail enviado com sucesso.");
+                _logger.LogInformation("E-mail enviado com sucesso via API.");
             }
             catch (Exception ex)
             {
