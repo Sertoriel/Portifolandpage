@@ -4,7 +4,7 @@ services:
     name: portfoland-web
     env: docker
     rootDir: backend
-    plan: free # Troque para 'starter' ou superior caso mude de plano
+    plan: free
     healthCheckPath: /
     envVars:
       - key: ConnectionStrings__DefaultConnection
@@ -12,7 +12,7 @@ services:
           name: portfoland-db
           property: connectionString
       - key: AllowedOrigins__0
-        value: https://Sertoriel-site.vercel.app # Exemplo, você mudará pela URL real
+        value: https://Sertoriel-site.vercel.app # Atualizaremos com o link real depois
       - key: Jwt__Key
         sync: false
       - key: AdminLogin__Username
@@ -20,8 +20,8 @@ services:
       - key: AdminLogin__Password
         sync: false
 
+databases:
   # PostgreSQL DB (Managed by Render)
-  - type: psql
-    name: portfoland-db
-    plan: free # Troque para 'starter' ou superior caso mude de plano
+  - name: portfoland-db
+    plan: free
     postgresMajorVersion: "16"
