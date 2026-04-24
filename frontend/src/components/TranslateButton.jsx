@@ -18,7 +18,7 @@ export default function TranslateButton() {
     return (
         <button 
             onClick={handleClick}
-            className="relative flex items-center justify-center p-2 rounded-full hover:bg-white/10 transition-colors w-12 h-12 cursor-pointer group"
+            className="relative flex-shrink-0 flex items-center justify-center p-2 rounded-full hover:bg-white/10 transition-colors w-10 h-10 md:w-12 md:h-12 cursor-pointer group"
             title={language === 'pt' ? "Change to English" : "Mudar para Português"}
         >
             <div className="w-full h-full invert opacity-80">
