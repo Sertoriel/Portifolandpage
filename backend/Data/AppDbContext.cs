@@ -15,6 +15,10 @@ public class AppDbContext : DbContext
     // Tabela do Novo Blog
     public DbSet<BlogPost> BlogPosts { get; set; } = null!;
 
+    // Novas Entidades
+    public DbSet<Resume> Resumes { get; set; } = null!;
+    public DbSet<Certificate> Certificates { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));

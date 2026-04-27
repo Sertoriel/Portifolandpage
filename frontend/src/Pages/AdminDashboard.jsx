@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router'
 import Navbar from '../components/Navbar'
 import AdminBlog from '../components/AdminBlog'
+import AdminResume from '../components/AdminResume'
+import AdminCertificates from '../components/AdminCertificates'
 
 export default function AdminDashboard() {
     const navigate = useNavigate()
@@ -224,22 +226,36 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* TAB SWITCHER */}
-                <div className="flex bg-brand-900 border border-brand-800 rounded-xl p-1 mb-8 shadow-inner">
+                <div className="flex flex-wrap bg-brand-900 border border-brand-800 rounded-xl p-1 mb-8 shadow-inner">
                     <button 
                         onClick={() => setActiveTab('projects')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'projects' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
+                        className={`flex-1 min-w-[150px] py-3 px-2 md:px-6 rounded-lg font-bold transition-all text-xs md:text-sm cursor-pointer ${activeTab === 'projects' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
                     >
-                        📁 Gestão de Projetos
+                        📁 Projetos
                     </button>
                     <button 
                         onClick={() => setActiveTab('blog')}
-                        className={`flex-1 py-3 px-6 rounded-lg font-bold transition-all text-sm md:text-base cursor-pointer ${activeTab === 'blog' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
+                        className={`flex-1 min-w-[150px] py-3 px-2 md:px-6 rounded-lg font-bold transition-all text-xs md:text-sm cursor-pointer ${activeTab === 'blog' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
                     >
-                        📝 Gestão do Blog
+                        📝 Blog
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('resume')}
+                        className={`flex-1 min-w-[150px] py-3 px-2 md:px-6 rounded-lg font-bold transition-all text-xs md:text-sm cursor-pointer ${activeTab === 'resume' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
+                    >
+                        📄 Currículos
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('certificates')}
+                        className={`flex-1 min-w-[150px] py-3 px-2 md:px-6 rounded-lg font-bold transition-all text-xs md:text-sm cursor-pointer ${activeTab === 'certificates' ? 'bg-brand-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-brand-800'}`}
+                    >
+                        🎓 Certificados
                     </button>
                 </div>
 
                 {activeTab === 'blog' && <AdminBlog />}
+                {activeTab === 'resume' && <AdminResume />}
+                {activeTab === 'certificates' && <AdminCertificates />}
 
                 {activeTab === 'projects' && (
                     <div className="animate-in fade-in zoom-in-95 duration-300">

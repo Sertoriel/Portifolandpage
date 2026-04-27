@@ -62,6 +62,7 @@ export default function Navbar() {
                                 <>
                                     <button onClick={() => scrollToSection('hero')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_home')}</button>
                                     <button onClick={() => scrollToSection('projetos')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_projects')}</button>
+                                    <button onClick={() => scrollToSection('certificados')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_certificates')}</button>
                                     <button onClick={() => scrollToSection('contato')} className="hover:text-brand-400 transition-colors cursor-pointer">{t('nav_contact')}</button>
                                 </>
                             ) : (
@@ -95,6 +96,7 @@ export default function Navbar() {
                                 <>
                                     <button onClick={() => scrollToSection('hero')} className="text-left text-gray-300 hover:text-white font-medium py-3 px-2 rounded-lg hover:bg-brand-800/30 transition-colors cursor-pointer">{t('nav_home')}</button>
                                     <button onClick={() => scrollToSection('projetos')} className="text-left text-gray-300 hover:text-white font-medium py-3 px-2 rounded-lg hover:bg-brand-800/30 transition-colors cursor-pointer">{t('nav_projects')}</button>
+                                    <button onClick={() => scrollToSection('certificados')} className="text-left text-gray-300 hover:text-white font-medium py-3 px-2 rounded-lg hover:bg-brand-800/30 transition-colors cursor-pointer">{t('nav_certificates')}</button>
                                     <button onClick={() => scrollToSection('contato')} className="text-left text-gray-300 hover:text-white font-medium py-3 px-2 rounded-lg hover:bg-brand-800/30 transition-colors cursor-pointer">{t('nav_contact')}</button>
                                 </>
                             ) : (

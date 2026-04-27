@@ -7,6 +7,7 @@ const dictionary = {
     nav_home: "Início",
     nav_back_home: "Voltar para a Home",
     nav_projects: "Projetos",
+    nav_certificates: "Certificações",
     nav_blog: "Blog",
     nav_contact: "Contato",
     nav_articles_btn: "Ver Artigos 📝",
@@ -15,6 +16,7 @@ const dictionary = {
     hero_description: "Software Engineer especializado em lógicas complexas e arquiteturas escaláveis. Desenvolvendo ferramentas sólidas e universos de jogos interativos.",
     hero_btn_projects: "Explorar Projetos ↓",
     hero_btn_blog: "Ler Artigos 📝",
+    hero_btn_cv: "Visualizar Currículo 📄",
 
     feat_title: "Meus",
     feat_title_span: "Projetos",
@@ -24,6 +26,14 @@ const dictionary = {
     feat_empty: "Nenhum projeto encontrado.",
     feat_empty_desc: "O banco de dados do .NET está vazio.",
     feat_error: "Erro de Conexão",
+
+    cert_title: "Certificações",
+    cert_desc: "Cursos e especializações concluídas.",
+    cert_view: "Visualizar",
+    preview_back: "Voltar",
+    preview_download: "Baixar PDF",
+    preview_download_mobile: "Baixar",
+    preview_error: "Não foi possível carregar a pré-visualização. Por favor, faça o download para visualizar o arquivo.",
 
     contact_title: "Entre em Contato",
     contact_desc: "Tem um projeto em mente? Vamos conversar e transformá-lo em realidade.",
@@ -63,6 +73,7 @@ const dictionary = {
     nav_home: "Home",
     nav_back_home: "Back to Home",
     nav_projects: "Projects",
+    nav_certificates: "Certifications",
     nav_blog: "Blog",
     nav_contact: "Contact",
     nav_articles_btn: "Read Articles 📝",
@@ -71,6 +82,7 @@ const dictionary = {
     hero_description: "Software Engineer specializing in complex logic and scalable architectures. Building solid tools and interactive game universes.",
     hero_btn_projects: "Explore Projects ↓",
     hero_btn_blog: "Read Articles 📝",
+    hero_btn_cv: "View Resume 📄",
 
     feat_title: "My",
     feat_title_span: "Projects",
@@ -80,6 +92,14 @@ const dictionary = {
     feat_empty: "No projects found.",
     feat_empty_desc: "The .NET database is empty.",
     feat_error: "Connection Error",
+
+    cert_title: "Certifications",
+    cert_desc: "Completed courses and specializations.",
+    cert_view: "View",
+    preview_back: "Back",
+    preview_download: "Download PDF",
+    preview_download_mobile: "Download",
+    preview_error: "Could not load preview. Please download to view the file.",
 
     contact_title: "Get in Touch",
     contact_desc: "Have a project in mind? Let's talk and make it a reality.",
