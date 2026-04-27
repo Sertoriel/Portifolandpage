@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 import Hero from '../components/Hero'
 import FeatureSection from '../components/FeatureSection'
+import CertificatesSection from '../components/CertificatesSection'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer' // <-- Não esqueça de importar o arquivo que criamos na mensagem anterior
 import ContactForm from '../components/ContactForm'
@@ -16,6 +17,10 @@ export default function Home() {
 
             <div id="projetos">
                 <FeatureSection />
+            </div>
+
+            <div id="certificados">
+                <CertificatesSection />
             </div>
 
             <div id="contato">

@@ -6,6 +6,7 @@ import AdminDashboard from './Pages/AdminDashboard'
 import Login from './Pages/Login'
 import BlogList from './Pages/BlogList'
 import BlogPostView from './Pages/BlogPostView'
+import DocumentPreview from './Pages/DocumentPreview'
 import LayoutBackground from './components/LayoutBackground'
 
 import { LanguageProvider } from './contexts/LanguageContext'
@@ -21,6 +22,9 @@ function App() {
         
         {/* Rota dinâmica (A página de detalhes esperando um ID) */}
         <Route path="/projeto/:id" element={<ProjectDetails />} />
+
+        {/* Rota para visualização de documentos (PDF/Certificados) */}
+        <Route path="/preview" element={<DocumentPreview />} />
 
         {/* Rota para a página de login */}
         <Route path="/login" element={<Login />} />

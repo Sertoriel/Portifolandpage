@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Lottie from 'lottie-react'
 import { useNavigate } from 'react-router'
@@ -8,7 +9,23 @@ import asciiLogo from '../assets/ASCII art/message.txt?raw'
 
 export default function Hero() {
     const navigate = useNavigate()
-    const { t } = useLanguage()
+    const { t, language } = useLanguage()
+    const [cvUrl, setCvUrl] = useState(null)
+
+    useEffect(() => {
+        const fetchCv = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/Resume?lang=${language}`)
+                if (res.ok) {
+                    const data = await res.json()
+                    setCvUrl(data.fileUrl)
+                }
+            } catch (err) {
+                // Ignore silent fail
+            }
+        }
+        fetchCv()
+    }, [language])
 
     // Função para o botão principal rolar até os projetos
     const scrollToProjects = () => {
@@ -53,7 +70,7 @@ export default function Hero() {
                         {t('hero_description')}
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto flex-wrap">
                         <button
                             onClick={scrollToProjects}
                             className="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl font-bold text-base transition-all shadow-[0_0_20px_rgba(37,106,94,0.3)] hover:shadow-[0_0_30px_rgba(37,106,94,0.6)] cursor-pointer"
@@ -66,6 +83,14 @@ export default function Hero() {
                         >
                             {t('hero_btn_blog')}
                         </button>
+                        {cvUrl && (
+                            <button
+                                onClick={() => navigate('/preview', { state: { title: language === 'pt' ? 'Currículo' : 'Resume', url: cvUrl } })}
+                                className="px-6 py-3 bg-brand-900 border border-brand-700 hover:bg-brand-700 hover:text-white text-brand-300 rounded-xl font-bold text-base transition-colors cursor-pointer flex items-center justify-center gap-2"
+                            >
+                                {t('hero_btn_cv')}
+                            </button>
+                        )}
                         <a
                             href="https://github.com/sertoriel"
                             target="_blank"
