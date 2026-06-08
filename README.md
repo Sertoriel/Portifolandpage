@@ -70,7 +70,7 @@ cd backend
 
 ```bash
 dotnet user-secrets init
-dotnet user-secrets set "Jwt:Key" "SUA_CHAVE_COMPLEXA_BEM_DIFICE_DE_QUEBRAR_123456!"
+dotnet user-secrets set "Jwt:Key" "SUA_CHAVE_COMPLEXA_BEM_CHATA_DE_QUEBRAR_123456!"
 dotnet user-secrets set "AdminLogin:Username" "seu_username"
 dotnet user-secrets set "AdminLogin:Password" "sua_senha_secreta"
 
