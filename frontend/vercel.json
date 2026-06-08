@@ -1,8 +1,57 @@
 {
   "rewrites": [
     {
+      "source": "/projeto/:id",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+        }
+      ],
+      "destination": "/api/og-injector?type=projeto&id=:id"
+    },
+    {
+      "source": "/blog/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+        }
+      ],
+      "destination": "/api/og-injector?type=blog&slug=:slug"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+        }
+      ],
+      "destination": "/api/og-injector?type=home"
+    },
+    {
+      "source": "/blog",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+        }
+      ],
+      "destination": "/api/og-injector?type=blog-list"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/og-injector.js": {
+      "includeFiles": "dist/index.html"
+    }
+  }
 }
