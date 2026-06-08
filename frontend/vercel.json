@@ -6,7 +6,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+          "value": ".*([Ff]acebookexternalhit|[Tt]witterbot|[Ll]inked[Ii]n[Bb]ot|[Ee]mbedly|[Qq]uora|[Pp]interest|[Ss]lackbot|[Dd]iscordbot|[Tt]elegram[Bb]ot|[Gg]ooglebot|[Bb]ingbot).*"
         }
       ],
       "destination": "/api/og-injector?type=projeto&id=:id"
@@ -17,7 +17,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+          "value": ".*([Ff]acebookexternalhit|[Tt]witterbot|[Ll]inked[Ii]n[Bb]ot|[Ee]mbedly|[Qq]uora|[Pp]interest|[Ss]lackbot|[Dd]iscordbot|[Tt]elegram[Bb]ot|[Gg]ooglebot|[Bb]ingbot).*"
         }
       ],
       "destination": "/api/og-injector?type=blog&slug=:slug"
@@ -28,7 +28,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+          "value": ".*([Ff]acebookexternalhit|[Tt]witterbot|[Ll]inked[Ii]n[Bb]ot|[Ee]mbedly|[Qq]uora|[Pp]interest|[Ss]lackbot|[Dd]iscordbot|[Tt]elegram[Bb]ot|[Gg]ooglebot|[Bb]ingbot).*"
         }
       ],
       "destination": "/api/og-injector?type=home"
@@ -39,7 +39,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|pinterest|slackbot|discordbot|telegrambot|googlebot|bingbot).*"
+          "value": ".*([Ff]acebookexternalhit|[Tt]witterbot|[Ll]inked[Ii]n[Bb]ot|[Ee]mbedly|[Qq]uora|[Pp]interest|[Ss]lackbot|[Dd]iscordbot|[Tt]elegram[Bb]ot|[Gg]ooglebot|[Bb]ingbot).*"
         }
       ],
       "destination": "/api/og-injector?type=blog-list"

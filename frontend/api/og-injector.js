@@ -11,25 +11,43 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+function generateMinimalHtml(title, description, imageUrl, pageType) {
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>${escapeHtml(title)}</title>
+  <meta name="description" content="${escapeHtml(description)}">
+  <meta property="og:type" content="${escapeHtml(pageType)}">
+  <meta property="og:title" content="${escapeHtml(title)}">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:image" content="${escapeHtml(imageUrl)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${escapeHtml(imageUrl)}">
+</head>
+<body>
+  <h1>${escapeHtml(title)}</h1>
+  <p>${escapeHtml(description)}</p>
+</body>
+</html>`;
+}
+
 function replaceOrAddMetaProperty(html, property, content) {
   const escapedContent = escapeHtml(content);
-  
-  // Procura por meta tags existentes com property="og:..." ou property="twitter:..."
   const regex = new RegExp(`<meta\\s+property="${property}"\\s+content="[^"]*"\\s*\\/?>`, 'i');
   const tag = `<meta property="${property}" content="${escapedContent}" />`;
   
   if (regex.test(html)) {
     return html.replace(regex, tag);
   } else {
-    // Insere no head antes do fechamento </head>
     return html.replace('</head>', `  ${tag}\n</head>`);
   }
 }
 
 function replaceOrAddMetaName(html, name, content) {
   const escapedContent = escapeHtml(content);
-  
-  // Procura por meta tags existentes com name="description" ou name="twitter:..."
   const regex = new RegExp(`<meta\\s+name="${name}"\\s+content="[^"]*"\\s*\\/?>`, 'i');
   const tag = `<meta name="${name}" content="${escapedContent}" />`;
   
@@ -47,7 +65,6 @@ export default async function handler(req, res) {
   const slug = query.slug;
 
   const host = headers.host || 'localhost:3000';
-  // Vercel costuma rodar sobre https em prod, localmente podemos inferir pelo host
   const protocol = host.startsWith('localhost') ? 'http:' : 'https:';
   const absoluteUrlBase = `${protocol}//${host}`;
 
@@ -62,14 +79,13 @@ export default async function handler(req, res) {
 
   try {
     if (type === 'projeto' && id) {
-      // Busca dados do projeto no Backend C#
-      const response = await fetch(`${apiUrl}/projects/${id}`);
+      const cleanId = encodeURIComponent(String(id).trim());
+      const response = await fetch(`${apiUrl}/projects/${cleanId}`);
       if (response.ok) {
         const project = await response.json();
         title = `${project.title} - Projeto`;
         description = project.shortDescription || project.fullDescription || description;
         
-        // Se houver uma thumbnail válida, usamos. Caso contrário, usamos a imagem dinâmica do @vercel/og
         if (project.thumbnailUrl && project.thumbnailUrl.startsWith('http')) {
           imageUrl = project.thumbnailUrl;
         } else {
@@ -78,14 +94,18 @@ export default async function handler(req, res) {
         pageType = 'article';
       }
     } else if (type === 'blog' && slug) {
-      // Busca dados do artigo do blog no Backend C#
-      const response = await fetch(`${apiUrl}/Blog/${slug}`);
+      // Remove encoding duplicado caso o slug venha com escape
+      let cleanSlug = slug;
+      if (String(slug).includes('%')) {
+        try {
+          cleanSlug = decodeURIComponent(slug);
+        } catch (_) {}
+      }
+      const response = await fetch(`${apiUrl}/Blog/${encodeURIComponent(cleanSlug)}`);
       if (response.ok) {
         const post = await response.json();
         title = post.title;
         description = post.summary || description;
-        
-        // O blog não tem Thumbnail no banco, então geramos o banner dinâmico usando nossa Edge Function
         imageUrl = `${absoluteUrlBase}/api/og?title=${encodeURIComponent(post.title)}&category=Blog`;
         pageType = 'article';
       }
@@ -96,13 +116,11 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error("Erro ao buscar dados do backend:", error.message);
-    // Em caso de falha da API, mantemos os fallbacks padrão
   }
 
   // Leitura do index.html gerado pelo build do Vite
   let htmlPath = path.join(process.cwd(), 'dist', 'index.html');
   
-  // Se estiver rodando localmente sem pasta dist, usa o index.html raiz como fallback
   if (!fs.existsSync(htmlPath)) {
     htmlPath = path.join(process.cwd(), 'index.html');
   }
@@ -112,7 +130,6 @@ export default async function handler(req, res) {
 
     // Substituição das Tags Meta e Título
     html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(title)}</title>`);
-    
     html = replaceOrAddMetaName(html, 'description', description);
 
     // Open Graph / Facebook
@@ -127,11 +144,14 @@ export default async function handler(req, res) {
     html = replaceOrAddMetaName(html, 'twitter:description', description);
     html = replaceOrAddMetaName(html, 'twitter:image', imageUrl);
 
-    // Envia a resposta final
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.status(200).send(html);
   } catch (err) {
-    console.error("Erro ao ler/processar o arquivo index.html:", err);
-    res.status(500).send("Internal Server Error");
+    console.error("Erro ao ler index.html. Servindo HTML mínimo resiliente de fallback:", err.message);
+    // Fallback de resiliência máxima: se falhar a leitura física do index.html, serve o HTML básico
+    // contendo os cabeçalhos de metatags que os robôs precisam para gerar o preview
+    const fallbackHtml = generateMinimalHtml(title, description, imageUrl, pageType);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.status(200).send(fallbackHtml);
   }
 }
